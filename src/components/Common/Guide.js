@@ -14,7 +14,7 @@ export const Guide = (props) => {
       <br/>
       <pre className={`${styles.pre}`}>
         <code>{
-        `return (<${props.component === 'ButtonWrap' ? 'ButtonWrap><Button>...</Button><Button>...</Button></ButtonWrap>' : props.component === 'TextInput' || props.component === 'CustomInput' ? `${props.component} />` : `${props.component}>...</${props.component}>`}`}
+        `return (<${props.component === 'ButtonWrap' ? 'ButtonWrap><Button>...</Button><Button>...</Button></ButtonWrap>' : props.component === 'TextInput' || props.component === 'CustomInput' ? `${props.component} />` : `${props.component}>...</${props.component}>`})`}
         </code>
       </pre>
       <ul className='pg_content'>
@@ -28,8 +28,8 @@ export const Guide = (props) => {
         <caption>필수</caption>
         <thead>
           <tr>
-            <th>속성명</th>
-            <th>종류</th>
+            <th>옵션명</th>
+            <th>데이터 타입</th>
             <th>설명</th>
           </tr>
         </thead>
@@ -46,11 +46,23 @@ export const Guide = (props) => {
             <td>Component</td>
             <td>버튼 컴포넌트</td>
           </tr>
-        ) : props.component === 'Title' || props.component === 'SubTitle' ? (
+        ) : props.component === 'Title' ? (
           <tr>
             <td>chidren</td>
             <td>Any Text</td>
             <td>타이틀 텍스트</td>
+          </tr>
+        ) : props.component === 'TextInput' || props.component === 'CustomInput' ? (
+          <tr>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        ) : props.component === 'Field' ? (
+          <tr>
+            <td>children</td>
+            <td>JSX Component</td>
+            <td>인풋 컴포넌트</td>
           </tr>
         ) : (
           <tr>
@@ -67,8 +79,8 @@ export const Guide = (props) => {
         <caption>선택</caption>
         <thead>
           <tr>
-            <th>속성명</th>
-            <th>종류</th>
+            <th>옵션명</th>
+            <th>데이터 타입</th>
             <th>설명</th>
           </tr>
         </thead>
@@ -136,13 +148,10 @@ export const Guide = (props) => {
                 <td><strong>1(기본값)</strong> / 2 / 3 / 4 / 5</td>
                 <td>타이틀 heading 설정(h1 ~ h5)</td>
               </tr>
-            </>
-          ) : props.component === 'SubTitle' ? (
-            <>
               <tr>
-                <td>text</td>
-                <td><strong>&#34; &#34; (기본값)</strong></td>
-                <td>서브 타이틀 텍스트</td>
+                <td>sub</td>
+                <td>Any Text</td>
+                <td>서브 타이틀 설정</td>
               </tr>
             </>
           ) : props.component === 'Text' ? (
@@ -156,6 +165,105 @@ export const Guide = (props) => {
                 <td>ell</td>
                 <td><strong>0(기본값)</strong> / 1 / 2 / 3</td>
                 <td>말줄임 설정</td>
+              </tr>
+            </>
+          ) : props.component === 'Field' ? (
+            <>
+              <tr>
+                <td>label</td>
+                <td>Any Text</td>
+                <td>인풋 라벨 텍스트 설정</td>
+              </tr>
+              <tr>
+                <td>info</td>
+                <td>시작태그에 info 추가</td>
+                <td>하단에 info 메세지 표시</td>
+              </tr>
+              <tr>
+                <td>valid</td>
+                <td>시작태그에 valid 추가</td>
+                <td>하단에 valid 메세지 표시</td>
+              </tr>
+              <tr>
+                <td>inValid</td>
+                <td>시작태그에 inValid 추가</td>
+                <td>하단에 inValid 메세지 표시</td>
+              </tr>
+              <tr>
+                <td>wrap</td>
+                <td>시작태그에 wrap 추가</td>
+                <td>CustomInput 조합 레이아웃일때 사용</td>
+              </tr>
+            </>
+          ) : props.component === 'TextInput' ? (
+            <>
+              <tr>
+                <td>type</td>
+                <td><strong>&#34;text&#34;(기본값)</strong> / &#34;number&#34; / &#34;tel&#34; / &#34;password&#34;</td>
+                <td>인풋 타입 지정</td>
+              </tr>
+              <tr>
+                <td>placeholder</td>
+                <td>Any Text</td>
+                <td>placeholder 문구 입력</td>
+              </tr>
+              <tr>
+                <td>minLength</td>
+                <td>Any Number</td>
+                <td>최소 글자 수 설정</td>
+              </tr>
+              <tr>
+                <td>maxLength</td>
+                <td>Any Number</td>
+                <td>최대 글자 수 설정</td>
+              </tr>
+              <tr>
+                <td>initText</td>
+                <td>Any Text</td>
+                <td>최초 표시될 value값 설정</td>
+              </tr>
+              <tr>
+                <td>readonly</td>
+                <td><strong>false(기본값)</strong> / true</td>
+                <td>readonly 여부 설정</td>
+              </tr>
+              <tr>
+                <td>disabled</td>
+                <td><strong>false(기본값)</strong> / true</td>
+                <td>readonly 여부 설정</td>
+              </tr>
+              <tr>
+                <td>clear</td>
+                <td><strong>true(기본값)</strong> / true</td>
+                <td>인풋 데이터 삭제버튼 표시 여부 설정</td>
+              </tr>
+              <tr>
+                <td>noWrap</td>
+                <td><strong>false(기본값)</strong> / true</td>
+                <td>input 외부에 wrap 클래스 유무 설정</td>
+              </tr>
+            </>
+          ) : props.component === 'CustomInput' ? (
+            <>
+              <tr>
+                <td>type</td>
+                <td><strong>&#34;text&#34;(기본값)</strong> / &#34;number&#34; / &#34;tel&#34; / &#34;password&#34;</td>
+                <td>인풋 타입 지정</td>
+              </tr>
+              <tr>
+                <td>length</td>
+                <td>Number</td>
+                <td>커스텀 패스워드 인풋에서 입력받을 글자 수</td>
+              </tr>
+              <tr>
+                <td>secureLength</td>
+                <td>Number</td>
+                <td>커스텀 패스워드 인풋에서 가림 처리할 글자 수</td>
+              </tr>
+              <tr>
+                <td>maxLength</td>
+                <td>Number</td>
+                <td>커스텀 패스워드 인풋에서 전체 글자수</td>
               </tr>
             </>
           ) : (

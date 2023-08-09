@@ -26,8 +26,8 @@ export const Field = ({ label, children, info, valid, inValid, wrap }) => {
   )
 }
 
-export const TextInput = ({type = "text", placeholder, maxLength, initText, readonly = false, disabled=false, clear = true, alignRight, noWrap}) => {
-  const [textValue, setTextValue] = useState(initText ? initText : "");
+export const TextInput = ({type = "text", placeholder, minLength, maxLength, value, readonly = false, disabled=false, clear = true, alignRight, noWrap}) => {
+  const [textValue, setTextValue] = useState(value ? value : "");
   const [isTextFocus, setIsTextFocus] = useState(false);
 
   const onChangeInput = (e) => {
@@ -55,6 +55,7 @@ export const TextInput = ({type = "text", placeholder, maxLength, initText, read
             value={textValue}
             readOnly={readonly}
             disabled={disabled}
+            minLength={minLength}
             maxLength={maxLength}
             style={(textValue.length > 0  && clear )? {width:"calc(100% - 2.4rem)"} : {width: "100%"}}
             className={`${type!=="text"?'_format':''}${type==="number"?" _number":''}${type==="password"?' _password':''}${alignRight?' alR':''}`}
@@ -104,7 +105,7 @@ export const TextInput = ({type = "text", placeholder, maxLength, initText, read
   )
 }
 
-export const CustomInput = ({ type, length, secureLength, maxLength }) => {
+export const CustomInput = ({ type="text", length, secureLength, maxLength }) => {
   const [isFocus, setIsFocus] = useState(false);
   const [password, setPassword] = useState([]);
 

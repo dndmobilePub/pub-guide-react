@@ -18,16 +18,15 @@
   }
 }
 
-.bottom{
-  position: fixed;
-  left:0;
-  bottom:0;
-  background-color: #ffffff;
-  width:100%;
-  padding:10px;
-  border-top:2px solid #ddd;
-}
-
 .btnWrapFull{
   margin-bottom:150px;
+}
+
+.box{
+  padding: 15px;
+  background-color: #d9d9d9;
+  border-radius: 5px;
+  + p{
+    margin-top:10px;
+  }
 }

@@ -1,22 +1,14 @@
-export const Title = ({ depth = 1, children }) => {
-  return (
-    <>
-      {depth === 1 ? (<h1 className="tit dep01">{children}</h1>) 
-      : depth === 2 ? (<h2 className="tit dep02">{children}</h2>)
-      : depth === 3 ? (<h3 className="tit dep03">{children}</h3>)
-      : depth === 4 ? (<h4 className="tit dep04">{children}</h4>)
-      : (<h5 className="tit dep05">{children}</h5>)}
-    </>
-  )
-}
+import React from "react";
 
-export const SubTitle = ({ text, children }) => {
-  return (
-    <h2 className="tit dep02">
-      <p className="tit sub">{text}</p>
-      {children}
-    </h2>
-  )
+export const Title = ({ depth = 1, children, sub }) => {
+  let headingElement
+  if(sub){
+    const subElement = React.createElement('p',{ className: 'tit sub' },sub);
+    headingElement = React.createElement(`h${depth}`,{ className: `tit dep0${depth}`},subElement,children)
+  }else{
+    headingElement = React.createElement(`h${depth}`,{ className: `tit dep0${depth}`},children)
+  }
+  return headingElement;
 }
 
 export const Text = ({ children, lang = "", ell = 0 }) => {

@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
       </div>
       <div id="pgContainer">
         <div className='pg_content'>
-          {pathname.startsWith("component") && (<Tabs />)}
+          {(pathname.startsWith("component") || pathname === "") && (<Tabs pathname={pathname} />)}
           <Component {...pageProps} />
         </div>
       </div>
