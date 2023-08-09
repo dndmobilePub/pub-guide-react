@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Guide } from "../../components/Common/Guide"
-import { CustomInput, Field, TextInput } from "../../components/UI/Form"
+import { Guide } from "../../../components/Common/Guide"
+import { CustomInput, Field, TextInput } from "../../../components/UI/Form"
 import styles from './index.module.scss';
 
 export default function Inputs() {

@@ -1,5 +1,5 @@
-import { Guide } from "../../components/Common/Guide";
-import { Button, ButtonWrap } from "../../components/UI/Button";
+import { Guide } from "../../../components/Common/Guide";
+import { Button, ButtonWrap } from "../../../components/UI/Button";
 import { useState } from "react"
 import styles from './index.module.scss';
 

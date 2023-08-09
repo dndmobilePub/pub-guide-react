@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Buttons from './button'
+import Buttons from './component/button'
 
 export default function Home() {
   return (

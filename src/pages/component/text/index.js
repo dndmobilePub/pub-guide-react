@@ -1,5 +1,5 @@
-import { Guide } from "../../components/Common/Guide";
-import { Title, SubTitle, Text } from "../../components/UI/Text";
+import { Guide } from "../../../components/Common/Guide";
+import { Title, SubTitle, Text } from "../../../components/UI/Text";
 import { useState } from "react"
 import styles from './index.module.scss';
 
