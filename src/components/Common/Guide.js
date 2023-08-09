@@ -13,7 +13,9 @@ export const Guide = (props) => {
       <p className='pg_content'>* 사용하고자 하는 컴포넌트에서 위와 같이 경로를 가져옵니다.</p>
       <br/>
       <pre className={`${styles.pre}`}>
-        <code>{`return (<${props.component === 'ButtonWrap' ? 'ButtonWrap><Button>...</Button><Button>...</Button></' : `${props.component}>...</`}${props.component}>)`}</code>
+        <code>{
+        `return (<${props.component === 'ButtonWrap' ? 'ButtonWrap><Button>...</Button><Button>...</Button></ButtonWrap>' : props.component === 'TextInput' || props.component === 'CustomInput' ? `${props.component} />` : `${props.component}>...</${props.component}>`}`}
+        </code>
       </pre>
       <ul className='pg_content'>
         <li>* return 문 안에 위와 같이 JSX 컴포넌트를 삽입하여 사용합니다.</li>

@@ -3,9 +3,8 @@ import { Title, SubTitle, Text } from "../../components/UI/Text";
 import { useState } from "react"
 import styles from './index.module.scss';
 
-export const Texts = () => {
+export default function Texts() {
   const [subTab, setSubTab] = useState("Title");
-
   const codeSnippet = `<Button href="#" size={""}>Write your text.</button>`;
 
   const handleCopyClick = () => {

@@ -142,6 +142,10 @@ export const CustomInput = ({ type, length, secureLength, maxLength }) => {
 
 export const CheckBox = () => {
   return (
-    <div>텍스트 인풋</div>
+    <label class="field-checkbox">
+      <input type="checkbox"/>
+      <i class="field-icon"></i>
+      <span class="field-label">미체크</span>
+    </label>
   )
 }

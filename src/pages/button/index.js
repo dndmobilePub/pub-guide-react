@@ -3,7 +3,7 @@ import { Button, ButtonWrap } from "../../components/UI/Button";
 import { useState } from "react"
 import styles from './index.module.scss';
 
-export const Buttons = () => {
+export default function Buttons() {
   const [subTab, setSubTab] = useState("Button");
   const [buttonSize, setButtonSize] = useState("md");
   const [txtType, setTxtType] = useState(0);
