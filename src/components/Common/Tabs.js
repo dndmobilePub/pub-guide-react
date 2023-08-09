@@ -15,8 +15,8 @@ const Tabs = (props) => {
           <li className={`${props.pathname === 'component/input' ? 'active' : ''}`}>
             <Link href={'/component/input'}>인풋</Link>
           </li>
-          <li className={`${props.pathname === 'component/radio-chk' ? 'active' : ''}`}>
-            <Link href={'/component/radio-chk'}>라디오/체크박스</Link>
+          <li className={`${props.pathname === 'component/radioChk' ? 'active' : ''}`}>
+            <Link href={'/component/radioChk'}>라디오/체크박스</Link>
           </li>
           <li className={`${props.pathname === 'component/popup' ? 'active' : ''}`}>
             <Link href={'/component/popup'}>팝업/알럿</Link>

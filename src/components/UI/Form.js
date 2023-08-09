@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-export const Field = ({ label, children, info, valid, inValid, wrap }) => {
+export const Field = ({ label, children, info, valid, inValid, wrap, className }) => {
   return (
-    <div className={`field${valid?' valid':''}${inValid?' invalid':''}`}>
+    <div className={`field${valid?' valid':''}${inValid?' invalid':''}${className}`}>
       {label && (<label className="field-label">{label}</label>)}
       <div className={`${wrap ? 'field-outline':''}`}>
       {children}
@@ -141,12 +141,21 @@ export const CustomInput = ({ type="text", length, secureLength, maxLength }) =>
   )
 }
 
-export const CheckBox = () => {
+export const CheckBox = ({ type='circle', checked=false, label, txt, readOnly, disabled=false}) => {
+  const [isChecked, setIsChecked] = useState(checked);
   return (
-    <label class="field-checkbox">
-      <input type="checkbox"/>
-      <i class="field-icon"></i>
-      <span class="field-label">미체크</span>
-    </label>
+    <Field className={`${type==="switch" ? "" : `${type==="circleLine"?" c-line":""}${type==="square"?" square":""}${type==="squareLine"?" s-line":""}`}`}>
+      <label className={`${type==="switch" ? `field-switch ${txt&&'txt'}` : `field-checkbox ${type==="circleLine"?"c-line":""}${type==="square"?" square":""}${type==="squareLine"?" s-line":""}`}`}>
+        <input type="checkbox" onChange={()=>{setIsChecked(!isChecked)}} checked={!readOnly && isChecked} disabled={disabled} />
+        <i className="field-icon"></i>
+        {label && (<span className="field-label">{label}</span>)}
+      </label>
+    </Field>
+  )
+}
+
+export const RadioInput = ({ }) => {
+  return (
+    <div></div>
   )
 }

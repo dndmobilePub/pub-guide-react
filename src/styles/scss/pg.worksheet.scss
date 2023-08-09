@@ -2,7 +2,7 @@
 /****************************************/
 /*	PART: IMPORT CSS
 /****************************************/
-@import 'common';
+@import 'cm.common';
 /****************************************/
 /*	PART: work sheet PAGE STYLE
 /****************************************/
@@ -10,7 +10,7 @@
 $pub:'.pub';
 $pg:'.pg';
 $pgHeader:'#pgHeader';
-$pgWrap:'__next';
+$pgWrap:'#pgWrap';
 $pgLayout:'.pg_layout';
 $pgContainer:'#pgContainer';
 $pgContent:'.pg_content';

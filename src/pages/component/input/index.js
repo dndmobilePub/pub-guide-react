@@ -1,17 +1,10 @@
 import { useState } from "react";
-import { Guide } from "../../../components/Common/Guide"
 import { CustomInput, Field, TextInput } from "../../../components/UI/Form"
+import { Guide } from "../../../components/Common/Guide"
 import styles from './index.module.scss';
 
 export default function Inputs() {
   const [subTab, setSubTab] = useState("Field");
-  const codeSnippet = `<Button href="#" size={""}>Write your text.</button>`;
-
-  const handleCopyClick = () => {
-    navigator.clipboard.writeText(codeSnippet)
-      .then(() => alert('복사되었습니다.'))
-      .catch(err => console.error('Failed to copy code:', err));
-  };
 
   return (
     <>

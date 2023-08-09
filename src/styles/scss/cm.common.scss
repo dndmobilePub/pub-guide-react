@@ -13,7 +13,17 @@
 @import 'variables';
 @import 'mixin';
 @import 'font';
-@import 'button';
+@import 'cm.guide';
+@import 'cp.text';
+@import 'cp.button';
+@import 'cp.ico';
+@import 'cp.input';
+@import 'cp.select';
+@import 'cp.rdochk';
+@import 'cp.popup';
+// @import 'cp.popup2';
+// @import 'cp.form';
+@import 'cp.list';
 /****************************************/
 /*	PART: RESET CSS
 /****************************************/
@@ -45,9 +55,9 @@ table {background-color:transparent;border-spacing:0;}
 input,
 textarea,
 select {background-color: transparent;}
-input:checked[type='checkbox'] {background-color:#666; -webkit-appearance:checkbox; appearance:checkbox;}
+input:checked[type='checkbox'] {background-color:#666; -webkit-appearance:checkbox;}
 input[type='text'],input[type='password'],input[type='submit'],
-input[type='search'],input[type='tel'],input[type='email'] { -webkit-appearance:none; appearance:none; border-radius:0; -webkit-border-radius:0; -moz-border-radius:0; -ms-border-radius:0; -o-border-radius:0;}
+input[type='search'],input[type='tel'],input[type='email'] { -webkit-appearance:none; border-radius:0; -webkit-border-radius:0; -moz-border-radius:0; -ms-border-radius:0; -o-border-radius:0;}
 input[type='search']::-webkit-search-cancel-button {-webkit-appearance:none;}
 /* 
 select {appearance:none; -webkit-appearance:none; -moz-appearance:none; border-radius:0; ; -webkit-border-radius:0 ; -moz-border-radius:0 ; -ms-border-radius:0 ; -o-border-radius:0 ; border-color: #ccc; text-indent: 10px;  background:url(../../img/ico_selarrow.png) 100% 50% no-repeat; background-size:auto calc(1.8rem/3);}
@@ -186,10 +196,6 @@ legend, caption{@include ir("hide");}
 #{$darMode} {
     background-color:$color-darkMode3; color:$color-white;
     body {background-color:$color-darkMode3; color:$color-white;}
-}
-
-#__next{
-  padding-top:17.5rem;
 }
 
 // *********************
