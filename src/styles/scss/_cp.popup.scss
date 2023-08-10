@@ -47,7 +47,7 @@
             .modal-container {@include overflow(y, auto); max-height:80%;}
         }
 
-        & > .modalWrap {min-height:30%; border-radius:1rem;}
+        & > .modalWrap {width:100%; min-height:30%; border-radius:1rem;}
     }
 
     &._bottom {
