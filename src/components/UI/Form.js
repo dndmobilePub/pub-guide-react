@@ -1,8 +1,8 @@
-import { useState } from "react"
+import React, { useState } from "react"
 
 export const Field = ({ label, children, info, valid, inValid, wrap, className }) => {
   return (
-    <div className={`field${valid?' valid':''}${inValid?' invalid':''}${className}`}>
+    <div className={`field${valid?' valid':''}${inValid?' invalid':''}${className?className:''}`}>
       {label && (<label className="field-label">{label}</label>)}
       <div className={`${wrap ? 'field-outline':''}`}>
       {children}
@@ -141,11 +141,11 @@ export const CustomInput = ({ type="text", length, secureLength, maxLength }) =>
   )
 }
 
-export const CheckBox = ({ type='circle', checked=false, label, txt, readOnly, disabled=false}) => {
+export const CheckBox = ({ type='circle', checked=false, label, readOnly, disabled=false}) => {
   const [isChecked, setIsChecked] = useState(checked);
   return (
     <Field className={`${type==="switch" ? "" : `${type==="circleLine"?" c-line":""}${type==="square"?" square":""}${type==="squareLine"?" s-line":""}`}`}>
-      <label className={`${type==="switch" ? `field-switch ${txt&&'txt'}` : `field-checkbox ${type==="circleLine"?"c-line":""}${type==="square"?" square":""}${type==="squareLine"?" s-line":""}`}`}>
+      <label className={`${type.startsWith("switch") ? `field-switch${type.endsWith("-text") ? ' txt':''}${type.endsWith("-lg") ? ' lg' : ''}` : `field-checkbox ${type==="circleLine"?"c-line":""}${type==="square"?" square":""}${type==="squareLine"?" s-line":""}`}`}>
         <input type="checkbox" onChange={()=>{setIsChecked(!isChecked)}} checked={!readOnly && isChecked} disabled={disabled} />
         <i className="field-icon"></i>
         {label && (<span className="field-label">{label}</span>)}
@@ -154,8 +154,32 @@ export const CheckBox = ({ type='circle', checked=false, label, txt, readOnly, d
   )
 }
 
-export const RadioInput = ({ }) => {
+export const RadioBox = ({ type="circle", name, children }) => {
   return (
-    <div></div>
+    <Field>
+      <div className={`field-group ${type==="box"?"opt-box":type==="boxChk"?"opt-box chk":""}`}>
+        {React.Children.map(children, child => {
+          return React.cloneElement(child, { type, name });
+        })}
+      </div>
+    </Field>
   )
+}
+
+export const Radio = ({ type, value, name, label, checked, defaultChecked, readOnly, disabled,  }) => {
+  return (
+    <label className={`${type === "boxChk" ? "field-checkbox" : "field-radio"}`}>
+      <input
+        type="radio"
+        value={value}
+        name={readOnly ? "" : name}
+        checked={readOnly ? false : checked}
+        defaultChecked={defaultChecked}
+        readOnly={readOnly}
+        disabled={disabled}
+      />
+      {type !== "box" && (<i className="field-icon"></i>)}
+      <span className="field-label">{label}</span>
+    </label>
+  );
 }

@@ -52,7 +52,7 @@ export const Guide = (props) => {
             <td>Any Text</td>
             <td>타이틀 텍스트</td>
           </tr>
-        ) : props.component === 'TextInput' || props.component === 'CustomInput' ? (
+        ) : props.component === 'TextInput' || props.component === 'CustomInput' || props.component === 'Radio' ? (
           <tr>
             <td>-</td>
             <td>-</td>
@@ -64,6 +64,19 @@ export const Guide = (props) => {
             <td>JSX Component</td>
             <td>인풋 컴포넌트</td>
           </tr>
+        ) : props.component === 'RadioBox' ? (
+          <>
+            <tr>
+              <td>children</td>
+              <td>JSX Component</td>
+              <td>{`<Radio>`} 컴포넌트</td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>Any Text</td>
+              <td>라디오 버튼을 활성화하기 위한 name 설정</td>
+            </tr>
+          </>
         ) : (
           <tr>
             <td>chidren</td>
@@ -264,6 +277,65 @@ export const Guide = (props) => {
                 <td>maxLength</td>
                 <td>Number</td>
                 <td>커스텀 패스워드 인풋에서 전체 글자수</td>
+              </tr>
+            </>
+          ) : props.component === 'CheckBox' ? (
+            <>
+              <tr>
+                <td>type</td>
+                <td><strong>&#34;circle&#34;(기본값)</strong> / &#34;circleLine&#34; / &#34;square&#34; / &#34;squareLine&#34; / &#34;switch&#34; / &#34;switch-text&#34; / &#34;switch-lg&#34;</td>
+                <td>체크박스 비주얼 타입 지정</td>
+              </tr>
+              <tr>
+                <td>checked</td>
+                <td>true / false(기본값)</td>
+                <td>체크박스 초기 체크 여부</td>
+              </tr>
+              <tr>
+                <td>label</td>
+                <td>Any Text</td>
+                <td>체크박스 라벨 텍스트</td>
+              </tr>
+              <tr>
+                <td>readOnly</td>
+                <td>true / false(기본값)</td>
+                <td>체크박스 readonly 설정</td>
+              </tr>
+              <tr>
+                <td>disabled</td>
+                <td>true / false(기본값)</td>
+                <td>체크박스 disabled 설정</td>
+              </tr>
+            </>
+          ) : props.component === 'RadioBox' ? (
+            <>
+              <tr>
+                <td>type</td>
+                <td><strong>&#34;circle&#34;(기본값)</strong> / &#34;box&#34; / &#34;boxChk&#34;</td>
+                <td>라디오 비주얼 타입 지정</td>
+              </tr>
+            </>
+          ) : props.component === 'Radio' ? (
+            <>
+              <tr>
+                <td>label</td>
+                <td>Any Text</td>
+                <td>체크박스 라벨 텍스트</td>
+              </tr>
+              <tr>
+                <td>defaultChecked</td>
+                <td>true / false(기본값)</td>
+                <td>라디오 최초 선택 설정</td>
+              </tr>
+              <tr>
+                <td>readOnly</td>
+                <td>true / false(기본값)</td>
+                <td>라디오 readonly 설정</td>
+              </tr>
+              <tr>
+                <td>disabled</td>
+                <td>true / false(기본값)</td>
+                <td>라디오 disabled 설정</td>
               </tr>
             </>
           ) : (
