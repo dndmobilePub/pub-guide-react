@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Header from "../components/Common/Header";
 import Tabs from "../components/Common/Tabs";
-import "../styles/scss/pg.worksheet.scss";
+import "../styles/scss/pg.workSheet.scss"
 
 export default function App({ Component, pageProps }) {
   // 가장 먼저 실행되는 컴포넌트로 모든 컴포넌트에 공통으로 적용할 속성 관리. 공통 적용 소스 중 동적인 소스 적용

@@ -3,6 +3,7 @@ import { Button, ButtonWrap } from "../../../components/UI/Button";
 import { Guide } from "../../../components/Common/Guide";
 import styles from "./index.module.scss";
 import { Modal, Toast } from "../../../components/UI/Popup";
+import { Tooltip } from "../../../components/UI/Tooltip";
 
 export default function Popup() {
   const [subTab, setSubTab] = useState("Popup");
@@ -84,7 +85,7 @@ export default function Popup() {
                   setIsOpenToast(true);
                 }}
               >
-                Bottom Modal
+                토스트 팝업
               </Button>
             </ButtonWrap>
             <Modal
@@ -103,54 +104,45 @@ export default function Popup() {
               />
             )}
           </div>
-          <br />
-
-          <h4>{subTab} : type(Circle line)</h4>
-          <p>{`<CheckBox type="circleLine" />`}</p>
-          <br />
-          <div className={`${styles.box}`}></div>
-          <br />
-
-          <h4>{subTab} : type(Square)</h4>
-          <p>{`<CheckBox type="square" />`}</p>
-          <br />
-          <div className={`${styles.box}`}></div>
-          <br />
-
-          <h4>{subTab} : type(Square line)</h4>
-          <p>{`<CheckBox type="squareLine" />`}</p>
-          <br />
-          <div className={`${styles.box}`}></div>
-          <br />
-
-          <h4>{subTab} : type(Switch)</h4>
-          <p>{`<CheckBox type="switch" />`}</p>
-          <br />
-          <div className={`${styles.box}`}></div>
-          <br />
         </>
       ) : (
         <>
           <h3>{subTab}</h3>
           <br />
 
-          <h4>{subTab} : type=&#34;circle&#34;</h4>
-          <p>{`<RadioBox name="basicRadio">...<Radio label="미체크"/>...</RadioBox>`}</p>
+          <h4>{subTab} : type(Circle line)</h4>
+          <p>{`<CheckBox type="circleLine" />`}</p>
           <br />
-          <div className={`${styles.box}`}></div>
-          <br />
-
-          <h4>{subTab} : type=&#34;box&#34;</h4>
-          <p>{`<RadioBox name="boxRadio" type="box">...<Radio label="옵션1"/>...</RadioBox>`}</p>
-          <br />
-          <div className={`${styles.box}`}></div>
-          <br />
-
-          <h4>{subTab} : type=&#34;boxChk&#34;</h4>
-          <p>{`<RadioBox name="boxChkRadio" type="boxChk">...<Radio label="옵션1"/>...</RadioBox>`}</p>
-          <br />
-          <div className={`${styles.box}`}></div>
-          <br />
+          <div className={`${styles.box}`} style={{ padding:"20px"}}>
+            <div>
+              <Tooltip label="기본형" content="ToolTip Default :<br><br> 일이삼사오육칠팔구십일이삼사오<br>ToolTip message"/>
+              <Tooltip label="기본형 가운데 가운데가운데가운데" reverse content="ToolTip message : Default <br> ToolTip message <br> ToolTip message"/>
+              <Tooltip label="기본형 텍스트 길다 기본형 텍스트<br>길다 기본형 텍스트 길다" content="ToolTip message : Default <br> ToolTip message <br> ToolTip message"/>
+            </div>
+            <hr />
+            <div>
+              <Tooltip label="왼쪽형" direction="left" labelPosition="r" content="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message"/>
+              <Tooltip label="센터센터" direction="left" reverse labelPosition="c" content="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message"/>
+              <Tooltip
+                label="아이콘 왼쪽, 텍스트가 매우매우매우매우매우매우매우매우매우매우매우 길 경우"
+                direction="left"
+                reverse
+                content="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message"
+              />
+            </div>
+            <hr />
+            <div>
+              <Tooltip label="위로" direction="top" content="ToolTip message : TOP <br> ToolTip message <br> ToolTip message"/>
+              <Tooltip label="위로 c" direction="top" labelPosition="c" content="ToolTip message : TOP <br> ToolTip message <br> ToolTip message"/>
+              <Tooltip label="위로 r" direction="top" labelPosition="r" content="ToolTip message : TOP <br> ToolTip message <br> ToolTip message"/>
+            </div>
+            <hr />
+            <div>
+              <Tooltip label="아래로" direction="bottom" content="ToolTip message : BOTTOM <br> ToolTip message <br> ToolTip message"/>
+              <Tooltip label="아래로 c" direction="bottom" labelPosition="c" content="ToolTip message : BOTTOM <br> ToolTip message <br> ToolTip message"/>
+              <Tooltip label="아래로 r" direction="bottom" labelPosition="r" content="ToolTip message : BOTTOM <br> ToolTip message <br> ToolTip message"/>
+            </div>
+          </div>
         </>
       )}
     </>

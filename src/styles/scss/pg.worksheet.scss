@@ -206,7 +206,7 @@ $pgDivice:'.frame_device';
         
     h1 {
         @include el-size(11rem, 5.4rem);
-        background:url('/images/logo.png') 0 50% no-repeat; background-size:11rem auto;
+        background:url('/img/logo.png') 0 50% no-repeat; background-size:11rem auto;
         opacity:.5;
     }
 
@@ -435,9 +435,9 @@ html.util_show {
     &.admin #pgContainer{margin-right:0;}
 }
 
-// #{$htmlM} {
-//     // #{$pgContainer} {margin-right:37rem;}
-// }
+#{$htmlM} {
+    // #{$pgContainer} {margin-right:37rem;}
+}
 
 #{$pgTit} {
     @include display(flex);
@@ -509,11 +509,11 @@ html.util_show {
                         background-color:rgba(255,255,255,0.3); background-position:1rem 50%; background-repeat:no-repeat; background-size:calc(50rem/10) auto;
                         border-radius:5rem; box-shadow:.1rem .1rem .1rem 0 rgba(0,0,0,0.3);
 
-                        &.ie{background-image:url('/images/ico_browser_ie.png')}
-                        &.chrome{background-image:url('/images/ico_browser_chrome.png')}
-                        &.firefox{background-image:url('/images/ico_browser_firefox.png')}
-                        &.safari{background-image:url('/images/ico_browser_safari.png')}
-                        &.opera{background-image:url('/images/ico_browser_opera.png')}
+                        &.ie{background-image:url(/img/ico_browser_ie.png)}
+                        &.chrome{background-image:url(/img/ico_browser_chrome.png)}
+                        &.firefox{background-image:url(/img/ico_browser_firefox.png)}
+                        &.safari{background-image:url(/img/ico_browser_safari.png)}
+                        &.opera{background-image:url(/img/ico_browser_opera.png)}
 
                         span{@include display(inline-block); text-indent:-9999px}
                     }

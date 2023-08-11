@@ -427,7 +427,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
-  -moz-binding: url(ellipsis.xml#ellipsis);
+  /* -moz-binding: url(ellipsis.xml#ellipsis); */
   white-space: nowrap;
   height: 2.1rem;
 }
@@ -438,7 +438,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
-  -moz-binding: url(ellipsis.xml#ellipsis);
+  /* -moz-binding: url(ellipsis.xml#ellipsis); */
   height: 4.2rem;
 }
 .txt-elp3 {
@@ -448,7 +448,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
-  -moz-binding: url(ellipsis.xml#ellipsis);
+  /* -moz-binding: url(ellipsis.xml#ellipsis); */
   height: 6.3rem;
 }
 

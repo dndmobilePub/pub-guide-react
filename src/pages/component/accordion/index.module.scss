@@ -19,19 +19,10 @@
 }
 
 .box {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
   padding: 15px;
   background-color: #d9d9d9;
   border-radius: 5px;
-  &.s {
-    max-width: 320px;
-  }
   + p {
     margin-top: 10px;
-  }
-  hr{
-    width:100%;
   }
 }
