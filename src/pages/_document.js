@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   // _app 다음으로 실행되는 마크업 기반 컴포넌트. 공통 적용 소스 중 정적인 소스 적용
@@ -11,5 +11,5 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }

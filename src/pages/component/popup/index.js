@@ -95,7 +95,13 @@ export default function Popup() {
               content={`<div>텍스트</div>`}
               confirmText="확인"
             />
-            {isOpenToast && (<Toast msg="토스트 팝업메세지를 출력" timer={3000} closeToast={closeToast} />)}
+            {isOpenToast && (
+              <Toast
+                msg="토스트 팝업메세지를 출력"
+                timer={3000}
+                closeToast={closeToast}
+              />
+            )}
           </div>
           <br />
 
