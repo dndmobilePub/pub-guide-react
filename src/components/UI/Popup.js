@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 
 export const Modal = ({
+  type,
   position,
   isOpen,
   toggleModal,
   title,
   confirmText,
+  confirmFunction,
   cancelText,
   content,
+  children
 }) => {
   const modalRef = useRef(null);
   const [modalHeight, setModalHeight] = useState(0);
-
   useEffect(() => {
     if (isOpen) {
       setModalHeight(modalRef.current.clientHeight);
@@ -38,12 +40,17 @@ export const Modal = ({
             }`
           : ""
       }`}
+      select-target={type ? 'select' : null}
       aria-hidden={isOpen}
       tabIndex={0}
       style={
         position === "center"
           ? { left: "10%", top: `calc(50% - ${modalHeight / 2}px)` }
-          : {}
+          : position === "left" 
+          ? { left: "0", top: `0` } 
+          : position === "top" 
+          ? { left: "0", top: `0` } 
+          : { left: "0", top: `calc(100% - ${modalHeight * 2}px)`, padding:'0' } 
       }
     >
       <div
@@ -58,24 +65,43 @@ export const Modal = ({
         }}
         ref={modalRef}
       >
-        <div className="modal-header">
-          <a href="#" className="ico ico-his-prev" role="button">
-            <span className="hide">이전페이지</span>
-          </a>
-          <h1 className="mp-title dep01">{title}</h1>
-          <a
-            href="#"
-            className="btn-close-pop ico ico-pop-close"
-            role="button"
-            onClick={() => {
-              toggleModal();
-            }}
-          >
-            <span className="hide">창닫기</span>
-          </a>
-        </div>
+        
+          {type !== "selectList" ? (
+            <div className="modal-header">
+              <a href="#" className="ico ico-his-prev" role="button">
+                <span className="hide">이전페이지</span>
+              </a>
+              <h1 className="mp-title dep01">{title}</h1>
+              <a
+                href="#"
+                className="btn-close-pop ico ico-pop-close"
+                role="button"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                <span className="hide">창닫기</span>
+              </a>
+            </div>
+          ):(
+            <div className="modal-title">
+              <h1 className="tit dep02">{title}</h1>
+              <a
+                href="#"
+                className="btn-close-pop ico ico-pop-close"
+                role="button"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                <span className="hide">창닫기</span>
+              </a>
+            </div>
+          )}
+          
+        
         <div className="modal-container">
-          <div dangerouslySetInnerHTML={{ __html: content }} />
+          {children ? children : (<div dangerouslySetInnerHTML={{ __html: content }} />)}
         </div>
         <div className="modal-footer">
           <div className="btnWrap grow">
@@ -83,6 +109,9 @@ export const Modal = ({
               <button
                 className="btn btn-size md type2 bg"
                 onClick={() => {
+                  if(confirmFunction){
+                    confirmFunction()
+                  }
                   toggleModal();
                 }}
               >

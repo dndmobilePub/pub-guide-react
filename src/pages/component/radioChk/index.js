@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { CheckBox, Radio, RadioBox } from "../../../components/UI/Form";
+import { CheckBox, CustomInput, Field, Radio, RadioBox } from "../../../components/UI/Form";
 import { Guide } from "../../../components/Common/Guide";
 import styles from "./index.module.scss";
+import { SelectBox } from "../../../components/UI/SelectBox";
 
 export default function RadioChk() {
   const [subTab, setSubTab] = useState("CheckBox");
@@ -32,6 +33,14 @@ export default function RadioChk() {
           }}
         >
           Radio
+        </li>
+        <li
+          className={`item${subTab === "SelectBox" ? " active" : ""}`}
+          onClick={() => {
+            setSubTab("SelectBox");
+          }}
+        >
+          SelectBox
         </li>
       </ul>
       <Guide type={`${subTab}`} component={subTab} />
@@ -95,7 +104,7 @@ export default function RadioChk() {
           </div>
           <br />
         </>
-      ) : (
+      ) : (subTab === "Radio" || subTab === "RadioBox") ? (
         <>
           <h3>{subTab}</h3>
           <br />
@@ -134,6 +143,52 @@ export default function RadioChk() {
               <Radio value="2" label="옵션2" />
               <Radio value="3" label="옵션3" />
             </RadioBox>
+          </div>
+          <br />
+        </>
+      ) : (
+        <>
+          <h3>{subTab}</h3>
+          <br />
+
+          <h4>{subTab} : type=&#34;mix&#34;</h4>
+          <p>{`<SelectBox type="mix"/>`}</p>
+          <br />
+          <div className={`${styles.box}`}>
+            <Field info="안내성 메세지" label="이메일">
+              <div className="field-outline">
+                <div className="field-input grow _input">
+                  <input type="tel" className="_format _number" placeholder="메일아이디" maxLength="10"/>
+                </div>
+                <span className="field-txt">@</span>
+                <SelectBox>
+                  <option defaultChecked>선택해주세요</option>
+                  <option>naver.com</option>
+                  <option>daum.net</option>
+                  <option>gmail.com</option>
+                </SelectBox>
+              </div>
+            </Field>
+          </div>
+          <br />
+
+          <h4>{subTab} : type=&#34;ui&#34;</h4>
+          <p>{`<SelectBox type="ui"/>`}</p>
+          <br />
+          <div className={`${styles.box}`}>
+            <Field label="휴대전화번호">
+              <div className="field-outline">
+                <SelectBox type="custom" selectTitle="통신사를 선택해주세요">
+                  <ul className="select-lst">
+                    <li><a className="sel-opt _defaultTxt">{initText}</a></li>
+                    <li><a className="sel-opt">SKT</a></li>
+                    <li><a className="sel-opt">KT</a></li>
+                    <li><a className="sel-opt">LG U+</a></li>
+                    <li><a className="sel-opt">알뜰폰</a></li>
+                  </ul>
+                </SelectBox>
+              </div>
+            </Field>
           </div>
           <br />
         </>
