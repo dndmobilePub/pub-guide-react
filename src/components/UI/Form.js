@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const Field = ({
   label,
@@ -224,8 +224,12 @@ export const CheckBox = ({
   label,
   readOnly,
   disabled = false,
+  onChange,
 }) => {
-  const [isChecked, setIsChecked] = useState(checked);
+  useEffect(() => {
+    setIsChecked(checked);
+  }, [checked]);
+  const [isChecked, setIsChecked] = useState(checked ?? false);
   return (
     <Field
       className={`${
@@ -237,6 +241,10 @@ export const CheckBox = ({
       }`}
     >
       <label
+        onChange={() => {
+          setIsChecked(!isChecked);
+          onChange && onChange();
+        }}
         className={`${
           type.startsWith("switch")
             ? `field-switch${type.endsWith("-text") ? " txt" : ""}${
@@ -251,6 +259,7 @@ export const CheckBox = ({
           type="checkbox"
           onChange={() => {
             setIsChecked(!isChecked);
+            onChange && onChange();
           }}
           checked={!readOnly && isChecked}
           disabled={disabled}
