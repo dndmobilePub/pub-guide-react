@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import $ from "jquery";
 
 export const Modal = ({
   type,
+  prev,
   position,
   isOpen,
   toggleModal,
@@ -10,98 +12,162 @@ export const Modal = ({
   confirmFunction,
   cancelText,
   content,
-  children
+  children,
 }) => {
+  const modalPopRef = useRef(null);
   const modalRef = useRef(null);
+  const modalTitRef = useRef(null);
+  const buttonRef1 = useRef(null);
+  const buttonRef2 = useRef(null);
+  const [modalWidth, setModalWidth] = useState(0);
   const [modalHeight, setModalHeight] = useState(0);
+  const [modalTitleHeight, setModalTitleHeight] = useState(0);
+  const [button1Height, setButton1Height] = useState(0);
+  const [button2Height, setButton2Height] = useState(0);
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen === true) {
       setModalHeight(modalRef.current.clientHeight);
+      setModalWidth(modalRef.current.clientWidth);
+      setModalTitleHeight(modalTitRef.current.clientHeight);
+      setButton1Height(buttonRef1.current.clientHeight);
+      setButton2Height(buttonRef2.current.clientHeight);
       const dimmed = document.createElement("div");
       dimmed.className = "dimmed";
       dimmed.ariaHidden = isOpen;
       document.body.appendChild(dimmed);
       document.body.classList.add("no-scroll");
-      console.log(modalHeight);
+
+      if(position !== "center"){
+        $(modalPopRef.current).animate(
+          position === "top" ? {
+            top: '0',
+            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
+          } : position === "left" ? {
+            left: '0',
+            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
+          } : {
+            bottom: '0',
+            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
+          } , 300).show();
+      }else{
+        $(modalPopRef.current).style = {
+          marginLeft: `-${modalWidth / 2}px`,
+          marginTop: "0px",
+          height: "0px",
+        }
+      }
       return () => {
         setModalHeight(0);
         document.body.removeChild(dimmed);
         document.body.classList.remove("no-scroll");
       };
+    }else{
+      if(position !== "center"){
+        $(modalPopRef.current).animate(
+          position === "top" ? {
+            top: '-100%',
+            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
+          } : position === "left" ? {
+            left: '-100%',
+            height: "100%",
+            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
+          } : {
+            bottom: '-100%',
+            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)',
+            maxHeight: `${document.body.clientHeight - 100}px`
+          } , 300).hide();
+      }else{
+        $(modalPopRef.current).style = {
+          marginLeft: `-${modalWidth / 2}px`,
+          marginTop: "0px",
+          height: "0px",
+        }
+      }
     }
-  }, [isOpen, modalHeight]);
+  }, [isOpen, modalHeight, position]);
 
   return (
     <div
-      className={`modalPop _${position} ${isOpen ? "_is-active " : ""}${
-        position !== "center"
-          ? `animation ${
-              isOpen ? `_slideIn-${position}` : `_slideOut-${position}`
-            }`
-          : ""
+      className={`modalPop _${position} ${
+        isOpen ? `_is-active${position === "bottom" ? " _scroll" : ""}` : ""
       }`}
-      select-target={type ? 'select' : null}
-      aria-hidden={isOpen}
+      select-target={type ? "select" : null}
+      aria-hidden={!isOpen}
       tabIndex={0}
-      style={
-        position === "center"
-          ? { left: "10%", top: `calc(50% - ${modalHeight / 2}px)` }
-          : position === "left" 
-          ? { left: "0", top: `0` } 
-          : position === "top" 
-          ? { left: "0", top: `0` } 
-          : { left: "0", top: `calc(100% - ${modalHeight * 2}px)`, padding:'0' } 
-      }
+      ref={modalPopRef}
     >
       <div
         className="modalWrap"
         role="dialog"
-        aria-modal={!isOpen}
-        style={{
-          height: `${
-            position === "left" || position === "right" ? "100%" : "auto"
-          }`,
-          transition: "opacity 250ms cubic-bezier(0.86, 0, 0.07, 1) 0s",
-        }}
+        aria-modal={isOpen}
+        style={
+          position === "top"
+            ? {
+                transition: "opacity 250ms cubic-bezier(0.86, 0, 0.07, 1) 0s",
+              }
+            : position === "bottom"
+            ? { maxHeight: `${document.body.clientHeight - 100}px` }
+            : {}
+        }
         ref={modalRef}
       >
-        
-          {type !== "selectList" ? (
-            <div className="modal-header">
+        {type !== "selectList" ? (
+          <div className="modal-header">
+            {prev === true && (
               <a href="#" className="ico ico-his-prev" role="button">
                 <span className="hide">이전페이지</span>
               </a>
-              <h1 className="mp-title dep01">{title}</h1>
-              <a
-                href="#"
-                className="btn-close-pop ico ico-pop-close"
-                role="button"
-                onClick={() => {
-                  toggleModal();
-                }}
-              >
-                <span className="hide">창닫기</span>
-              </a>
-            </div>
-          ):(
-            <div className="modal-title">
-              <h1 className="tit dep02">{title}</h1>
-              <a
-                href="#"
-                className="btn-close-pop ico ico-pop-close"
-                role="button"
-                onClick={() => {
-                  toggleModal();
-                }}
-              >
-                <span className="hide">창닫기</span>
-              </a>
-            </div>
+            )}
+            <h1 className="mp-title dep01" ref={modalTitRef}>
+              {title}
+            </h1>
+            <a
+              href="#"
+              className="btn-close-pop ico ico-pop-close"
+              role="button"
+              onClick={() => {
+                toggleModal();
+              }}
+            >
+              <span className="hide">창닫기</span>
+            </a>
+          </div>
+        ) : (
+          <div className="modal-title" ref={modalTitRef}>
+            <h1 className="tit dep02">{title}</h1>
+            <a
+              href="#"
+              className="btn-close-pop ico ico-pop-close"
+              role="button"
+              onClick={() => {
+                toggleModal();
+              }}
+            >
+              <span className="hide">창닫기</span>
+            </a>
+          </div>
+        )}
+
+        <div
+          className="modal-container"
+          style={
+            position === "bottom"
+              ? {
+                  height: `${
+                    document.body.clientHeight -
+                    (modalTitleHeight +
+                      (button1Height ? button1Height : button2Height)) -
+                    173
+                  }px`,
+                }
+              : {}
+          }
+        >
+          {children ? (
+            children
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: content }} />
           )}
-          
-        
-        <div className="modal-container">
-          {children ? children : (<div dangerouslySetInnerHTML={{ __html: content }} />)}
         </div>
         <div className="modal-footer">
           <div className="btnWrap grow">
@@ -109,11 +175,12 @@ export const Modal = ({
               <button
                 className="btn btn-size md type2 bg"
                 onClick={() => {
-                  if(confirmFunction){
-                    confirmFunction()
+                  if (confirmFunction) {
+                    confirmFunction();
                   }
                   toggleModal();
                 }}
+                ref={buttonRef1}
               >
                 {confirmText}
               </button>
@@ -124,6 +191,7 @@ export const Modal = ({
                 onClick={() => {
                   toggleModal();
                 }}
+                ref={buttonRef2}
               >
                 {cancelText}
               </button>
@@ -136,26 +204,26 @@ export const Modal = ({
 };
 
 export const Toast = ({ msg, timer, closeToast }) => {
-  console.log(timer);
-  const [isHide, setIsHide] = useState(false);
+  const toastRef = useRef(null);
   useEffect(() => {
-    setTimeout(() => {
-      setIsHide(true);
+    const toastTimer = setTimeout(() => {
+      $(toastRef.current).fadeOut();
       setTimeout(() => {
         closeToast();
       }, 1000);
     }, timer);
     return () => {
-      setIsHide(false);
+      clearTimeout(toastTimer);
     };
   }, []);
 
   return (
     <div
-      className={`toastWrap ${isHide ? "animation _fadeOut" : ""}`}
+      className="toastWrap"
       role="alert"
       aria-live="assertive"
       tabIndex="0"
+      ref={toastRef}
     >
       <div className="toast-msg">{msg}</div>
     </div>

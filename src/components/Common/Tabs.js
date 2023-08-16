@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const Tabs = (props) => {
-  console.log("props : ", props.pathname);
   return (
     <>
       <div className="pg_board_tab">

@@ -101,12 +101,14 @@ export default function RadioChk() {
           <p>{`<RadioBox name="basicRadio">...<Radio label="미체크"/>...</RadioBox>`}</p>
           <br />
           <div className={`${styles.box}`}>
-            <RadioBox name="basicRadio">
-              <Radio label="미체크" />
-              <Radio label="체크" defaultChecked />
-              <Radio label="readonly" readOnly />
-              <Radio label="disabled" disabled />
-            </RadioBox>
+            <Field group>
+              <RadioBox name="basicRadio">
+                <Radio label="미체크" />
+                <Radio label="체크" defaultChecked />
+                <Radio label="readonly" readOnly />
+                <Radio label="disabled" disabled />
+              </RadioBox>
+            </Field>
           </div>
           <br />
 
@@ -114,11 +116,13 @@ export default function RadioChk() {
           <p>{`<RadioBox name="boxRadio" type="box">...<Radio label="옵션1"/>...</RadioBox>`}</p>
           <br />
           <div className={`${styles.box}`}>
-            <RadioBox type="box" name="optBox">
-              <Radio value="1" label="옵션1" />
-              <Radio value="2" label="옵션2" />
-              <Radio value="3" label="옵션3" />
-            </RadioBox>
+            <Field group type="box">
+              <RadioBox name="optBox" type="box">
+                <Radio value="1" label="옵션1" />
+                <Radio value="2" label="옵션2" />
+                <Radio value="3" label="옵션3" />
+              </RadioBox>
+            </Field>
           </div>
           <br />
 
@@ -126,11 +130,13 @@ export default function RadioChk() {
           <p>{`<RadioBox name="boxChkRadio" type="boxChk">...<Radio label="옵션1"/>...</RadioBox>`}</p>
           <br />
           <div className={`${styles.box}`}>
-            <RadioBox type="boxChk" name="optBox2">
-              <Radio value="1" label="옵션1" />
-              <Radio value="2" label="옵션2" />
-              <Radio value="3" label="옵션3" />
-            </RadioBox>
+            <Field group type="boxChk">
+              <RadioBox name="optBox2" type="boxChk">
+                <Radio value="1" label="옵션1" />
+                <Radio value="2" label="옵션2" />
+                <Radio value="3" label="옵션3" />
+              </RadioBox>
+            </Field>
           </div>
           <br />
         </>

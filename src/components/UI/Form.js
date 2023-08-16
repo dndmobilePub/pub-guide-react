@@ -13,12 +13,12 @@ export const Field = ({
 }) => {
   return (
     <div
-      className={`field${valid ? " valid" : ""}${inValid ? " invalid" : ""}${type ? ' '+type:''}${
+      className={`field${valid ? " valid" : ""}${inValid ? " invalid" : ""}${(type==="box" || type==="boxChk") || !type ? "" : ' '+type}${
         className ? ' '+className : ""
       }`}
     >
       {label && <label className="field-label">{label}</label>}
-      {wrap ? <div className={`${wrap ? "field-outline" : ""}`}>{children}</div> : <div className={`${group ? "field-group" : ""}`}>{children}</div>}
+      {wrap ? <div className={`${wrap ? "field-outline" : ""}`}>{children}</div> : <div className={`${group ? `field-group${type==="box"?" opt-box":type==="boxChk"?" opt-box chk":""}` : ""}`}>{children}</div>}
       {valid && (
         <p className="field-msg">
           <span className="ico ico-error txt-r">{valid}</span>
@@ -263,17 +263,11 @@ export const CheckBox = ({
 
 export const RadioBox = ({ type = "circle", name, children }) => {
   return (
-    <Field>
-      <div
-        className={`field-group ${
-          type === "box" ? "opt-box" : type === "boxChk" ? "opt-box chk" : ""
-        }`}
-      >
+      <>
         {React.Children.map(children, (child) => {
           return React.cloneElement(child, { type, name });
         })}
-      </div>
-    </Field>
+      </>
   );
 };
 

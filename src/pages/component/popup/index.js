@@ -8,6 +8,8 @@ import { Tooltip } from "../../../components/UI/Tooltip";
 export default function Popup() {
   const [subTab, setSubTab] = useState("Popup");
   const [position, setPosition] = useState("top");
+  const [prev, setPrev] = useState(false);
+  const [modalContents, setModalContents] = useState('<div>텍스트</div>');
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenToast, setIsOpenToast] = useState(false);
   const toggleModal = () => {
@@ -51,7 +53,9 @@ export default function Popup() {
               <Button
                 onClick={() => {
                   setPosition("top");
+                  setPrev(true);
                   setIsOpenModal(!isOpenModal);
+                  setModalContents(`<div>텍스트</div>`)
                 }}
               >
                 Top Modal
@@ -59,7 +63,9 @@ export default function Popup() {
               <Button
                 onClick={() => {
                   setPosition("center");
+                  setPrev(false);
                   setIsOpenModal(!isOpenModal);
+                  setModalContents(`<div>텍스트</div>`)
                 }}
               >
                 Center Modal
@@ -67,7 +73,9 @@ export default function Popup() {
               <Button
                 onClick={() => {
                   setPosition("left");
+                  setPrev(true);
                   setIsOpenModal(!isOpenModal);
+                  setModalContents(`<div>텍스트</div>`)
                 }}
               >
                 Left Modal
@@ -75,7 +83,9 @@ export default function Popup() {
               <Button
                 onClick={() => {
                   setPosition("bottom");
+                  setPrev(false);
                   setIsOpenModal(!isOpenModal);
+                  setModalContents(`<p style='height:1000px; background-color:yellow'>Bottom Modal Content</p>`)
                 }}
               >
                 Bottom Modal
@@ -91,10 +101,12 @@ export default function Popup() {
             <Modal
               position={position}
               isOpen={isOpenModal}
+              prev={prev}
               toggleModal={toggleModal}
               title={`${position} 모달 타이틀`}
-              content={`<div>텍스트</div>`}
+              content={modalContents}
               confirmText="확인"
+              cancelText="취소"
             />
             {isOpenToast && (
               <Toast

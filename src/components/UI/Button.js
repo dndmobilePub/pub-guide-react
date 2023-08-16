@@ -61,7 +61,6 @@ export const Button = ({
 };
 
 export const ButtonWrap = ({ full, grow, children }) => {
-  console.log(full, grow);
   return (
     <div className={`btnWrap ${full ? "full" : ""} ${grow ? "grow" : ""}`}>
       {children}
