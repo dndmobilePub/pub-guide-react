@@ -16,13 +16,13 @@ export const Guide = (props) => {
       <br />
       <pre className={`${styles.pre}`}>
         <code>
-          {`return (<${
+          {`return (${
             props.component === "ButtonWrap"
-              ? "ButtonWrap><Button>...</Button><Button>...</Button></ButtonWrap>"
+              ? "<ButtonWrap><Button>...</Button><Button>...</Button></ButtonWrap>"
               : props.component === "TextInput" ||
                 props.component === "CustomInput"
-              ? `${props.component} />`
-              : `${props.component}>...</${props.component}>`
+              ? `<${props.component} />`
+              : `<${props.component}>...</${props.component}>`
           })`}
         </code>
       </pre>
@@ -94,6 +94,27 @@ export const Guide = (props) => {
                 <td>name</td>
                 <td>Any Text</td>
                 <td>라디오 버튼을 활성화하기 위한 name 설정</td>
+              </tr>
+            </>
+          ) : props.component === "SelectBox" ? (
+            <>
+              <tr>
+                <td>list</td>
+                <td>[ &#34;option1&#34;,&#34;option2&#34;,... ]</td>
+                <td>SelectBox 옵션에 들어갈 문자열 형태의 배열</td>
+              </tr>
+            </>
+          ) : props.component === "Accordion" ? (
+            <>
+              <tr>
+                <td>title</td>
+                <td>Any Text</td>
+                <td>아코디언 제목</td>
+              </tr>
+              <tr>
+                <td>content</td>
+                <td>Any html</td>
+                <td>아코디언 컨텐츠</td>
               </tr>
             </>
           ) : (
@@ -407,6 +428,64 @@ export const Guide = (props) => {
                 <td>disabled</td>
                 <td>true / false(기본값)</td>
                 <td>라디오 disabled 설정</td>
+              </tr>
+            </>
+          ) : props.component === "SelectBox" ? (
+            <>
+              <tr>
+                <td>type</td>
+                <td>- (기본값) / custom</td>
+                <td>커스텀 셀렉트박스일 경우에 type값 지정 필요</td>
+              </tr>
+              <tr>
+                <td>selectTitle</td>
+                <td>Any Text</td>
+                <td>커스텀 셀렉트박스일 경우 모달창 상단에 들어갈 타이틀 설정</td>
+              </tr>
+            </>
+          ) : props.component === "Accordion" ? (
+            <>
+              <tr>
+                <td>scroll</td>
+                <td>true / false(기본값)</td>
+                <td>제목 선택시 해당 아코디언으로 스크롤</td>
+              </tr>
+              <tr>
+                <td>btnStyle</td>
+                <td>1(기본값) / 2</td>
+                <td>우측 btn on/off 스타일 변경</td>
+              </tr>
+              <tr>
+                <td>activeColor</td>
+                <td>-(기본값) / activeColor</td>
+                <td>우측 btn on/off 활설화 컬러값 변경</td>
+              </tr>
+              <tr>
+                <td>onlyBtn</td>
+                <td>-(기본값) / onlyBtn</td>
+                <td>아코디언 하나만 열리도록 변경</td>
+              </tr>
+              <tr>
+                <td>chkBox</td>
+                <td>-(기본값) / chkBox</td>
+                <td>체크박스 포함하도록 변경</td>
+              </tr>
+              <tr>
+                <td>defaultView</td>
+                <td>
+                  {"off"}(기본값) / {"on"}
+                </td>
+                <td>최초 마운트시 컨텐츠 보이도록 변경</td>
+              </tr>
+              <tr>
+                <td>children</td>
+                <td>JSX Component</td>
+                <td>커스텀 아코디언을 위한 JSX 컴포넌트</td>
+              </tr>
+              <tr>
+                <td>onClick</td>
+                <td>-(기본값) / Any function</td>
+                <td>클릭했을때 실행할 함수가 있다면 추가</td>
               </tr>
             </>
           ) : (

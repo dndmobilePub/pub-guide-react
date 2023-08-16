@@ -27,25 +27,22 @@ export const AccordionWrap = ({ toggleOne = false, children }) => {
 };
 
 export const Accordion = ({
-  title,
-  content,
+  title = "no-title",
+  content = "no-content",
   scroll = false,
   btnStyle = 1,
-  datatype,
   btnNone,
   onlyBtn,
   chkBox,
-  chkStatus,
   activeColor,
-  defaultView,
-  defaultChecked,
+  defaultView = "off",
   children,
   onClick,
+  datatype,
+  chkStatus,
 }) => {
   const [isActive, setIsActive] = useState(false);
-  const [isChecked, setIsChecked] = useState(
-    defaultChecked ? defaultChecked : false
-  );
+  const [isChecked, setIsChecked] = useState(false);
   const contentRef = useRef(null);
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);

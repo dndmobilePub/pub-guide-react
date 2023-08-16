@@ -7,16 +7,18 @@ export const Field = ({
   valid,
   inValid,
   wrap,
+  type,
+  group,
   className,
 }) => {
   return (
     <div
-      className={`field${valid ? " valid" : ""}${inValid ? " invalid" : ""}${
-        className ? className : ""
+      className={`field${valid ? " valid" : ""}${inValid ? " invalid" : ""}${type ? ' '+type:''}${
+        className ? ' '+className : ""
       }`}
     >
       {label && <label className="field-label">{label}</label>}
-      <div className={`${wrap ? "field-outline" : ""}`}>{children}</div>
+      {wrap ? <div className={`${wrap ? "field-outline" : ""}`}>{children}</div> : <div className={`${group ? "field-group" : ""}`}>{children}</div>}
       {valid && (
         <p className="field-msg">
           <span className="ico ico-error txt-r">{valid}</span>
@@ -231,15 +233,6 @@ export const CheckBox = ({
   }, [checked]);
   const [isChecked, setIsChecked] = useState(checked ?? false);
   return (
-    <Field
-      className={`${
-        type === "switch"
-          ? ""
-          : `${type === "circleLine" ? " c-line" : ""}${
-              type === "square" ? " square" : ""
-            }${type === "squareLine" ? " s-line" : ""}`
-      }`}
-    >
       <label
         onChange={() => {
           setIsChecked(!isChecked);
@@ -250,9 +243,7 @@ export const CheckBox = ({
             ? `field-switch${type.endsWith("-text") ? " txt" : ""}${
                 type.endsWith("-lg") ? " lg" : ""
               }`
-            : `field-checkbox ${type === "circleLine" ? "c-line" : ""}${
-                type === "square" ? " square" : ""
-              }${type === "squareLine" ? " s-line" : ""}`
+            : `field-checkbox${type ? ' '+type : ''}`
         }`}
       >
         <input
@@ -267,7 +258,6 @@ export const CheckBox = ({
         <i className="field-icon"></i>
         {label && <span className="field-label">{label}</span>}
       </label>
-    </Field>
   );
 };
 

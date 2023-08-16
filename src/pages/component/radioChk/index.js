@@ -6,10 +6,8 @@ import { SelectBox } from "../../../components/UI/SelectBox";
 
 export default function RadioChk() {
   const [subTab, setSubTab] = useState("CheckBox");
-  // const [activeSelect, setActiveSelect] = useState('선택');
-  // const selectList = ['선택','SKT','KT','LG U+','알뜰폰'];
   return (
-    <>
+    <div id="cp-wrap">
       <ul className={`${styles.subTab} active`}>
         <li
           className={`item${subTab === "CheckBox" ? " active" : ""}`}
@@ -45,70 +43,59 @@ export default function RadioChk() {
         </li>
       </ul>
       <Guide type={`${subTab}`} component={subTab} />
-      <hr />
+      <section className="cp-content">
       {subTab === "CheckBox" ? (
         <>
-          <h3>{subTab}</h3>
-          <br />
-
-          <h4>{subTab} : type(Circle)</h4>
-          <p>{`<CheckBox type="circle" />`}</p>
+          <h2 className="cp-tit dep02">Checkbox</h2>
           <br />
           <div className={`${styles.box}`}>
-            <CheckBox type="circle" label="미체크" />
-            <CheckBox type="circle" checked={true} label="체크" />
-            <CheckBox type="circle" label="readonly" readOnly />
-            <CheckBox type="circle" label="disabled" disabled />
+            <Field group type="circle" label="circle">
+              <CheckBox type="circle" label="미체크2" />
+              <CheckBox type="circle" checked={true} label="체크" />
+              <CheckBox type="circle" label="readonly" readOnly />
+              <CheckBox type="circle" label="disabled" disabled />
+            </Field>
           </div>
-          <br />
-
-          <h4>{subTab} : type(Circle line)</h4>
-          <p>{`<CheckBox type="circleLine" />`}</p>
-          <br />
+          <hr className="hr divice"/>
           <div className={`${styles.box}`}>
-            <CheckBox type="circleLine" label="미체크" />
-            <CheckBox type="circleLine" checked={true} label="체크" />
-            <CheckBox type="circleLine" label="readonly" readOnly />
-            <CheckBox type="circleLine" label="disabled" disabled />
+            <Field group type="c-line" label="circleLine">
+              <CheckBox type="c-line" label="미체크" />
+              <CheckBox type="c-line" checked={true} label="체크" />
+              <CheckBox type="c-line" label="readonly" readOnly />
+              <CheckBox type="c-line" label="disabled" disabled />
+            </Field>
           </div>
-          <br />
-
-          <h4>{subTab} : type(Square)</h4>
-          <p>{`<CheckBox type="square" />`}</p>
-          <br />
+          <hr className="hr divice"/>
           <div className={`${styles.box}`}>
-            <CheckBox type="square" label="미체크" />
-            <CheckBox type="square" checked={true} label="체크" />
-            <CheckBox type="square" label="readonly" readOnly />
-            <CheckBox type="square" label="disabled" disabled />
+            <Field group type="square" label="square">
+              <CheckBox type="square" label="미체크" />
+              <CheckBox type="square" checked={true} label="체크" />
+              <CheckBox type="square" label="readonly" readOnly />
+              <CheckBox type="square" label="disabled" disabled />
+            </Field>
           </div>
-          <br />
-
-          <h4>{subTab} : type(Square line)</h4>
-          <p>{`<CheckBox type="squareLine" />`}</p>
-          <br />
+          <hr className="hr divice"/>
           <div className={`${styles.box}`}>
-            <CheckBox type="squareLine" label="미체크" />
-            <CheckBox type="squareLine" checked={true} label="체크" />
-            <CheckBox type="squareLine" label="readonly" readOnly />
-            <CheckBox type="squareLine" label="disabled" disabled />
+            <Field group type="s-line" label="squareLine">
+              <CheckBox type="s-line" label="미체크" />
+              <CheckBox type="s-line" checked={true} label="체크" />
+              <CheckBox type="s-line" label="readonly" readOnly />
+              <CheckBox type="s-line" label="disabled" disabled />
+            </Field>
           </div>
-          <br />
-
-          <h4>{subTab} : type(Switch)</h4>
-          <p>{`<CheckBox type="switch" />`}</p>
-          <br />
+          <hr className="hr divice"/>
           <div className={`${styles.box}`}>
-            <CheckBox type="switch" />
-            <CheckBox type="switch-text" />
-            <CheckBox type="switch-lg" />
+            <Field group label="switch">
+              <CheckBox type="switch" />
+              <CheckBox type="switch-text" />
+              <CheckBox type="switch-lg" />
+            </Field>
           </div>
-          <br />
         </>
       ) : (subTab === "Radio" || subTab === "RadioBox") ? (
         <>
-          <h3>{subTab}</h3>
-          <br />
+          <h2 className="cp-tit dep02">Radio</h2>
+
 
           <h4>{subTab} : type=&#34;circle&#34;</h4>
           <p>{`<RadioBox name="basicRadio">...<Radio label="미체크"/>...</RadioBox>`}</p>
@@ -148,9 +135,8 @@ export default function RadioChk() {
           <br />
         </>
       ) : (
-        <>
-          <h3>{subTab}</h3>
-          <br />
+        <div>
+          <h2 className="cp-tit dep02">SELECT: INPUT MIX</h2>
 
           <h4>{subTab} : type=&#34;mix&#34;</h4>
           <p>{`<SelectBox type="mix"/>`}</p>
@@ -168,6 +154,7 @@ export default function RadioChk() {
           </div>
           <br />
 
+          <h2 className="cp-tit dep02">SELECT: UI select</h2>
           <h4>{subTab} : type=&#34;ui&#34;</h4>
           <p>{`<SelectBox type="ui"/>`}</p>
           <br />
@@ -179,8 +166,9 @@ export default function RadioChk() {
             </Field>
           </div>
           <br />
-        </>
+        </div>
       )}
-    </>
+      </section>
+    </div>
   );
 }

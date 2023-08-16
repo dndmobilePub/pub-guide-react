@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Accordion, AccordionWrap } from "../../../components/UI/Accordion";
 import { CheckBox, Field } from "../../../components/UI/Form";
 import { accordionData } from "../../../data/accordionData";
+import { Guide } from "../../../components/Common/Guide";
 
 export default function Accordions() {
   const [termsChk, setTermsChk] = useState(false);
@@ -34,6 +35,7 @@ export default function Accordions() {
   return (
     <>
       <div id="cp-wrap">
+      <Guide type={`Accordion`} component={'Accordion'} />
         <section className="cp-content">
           <h2 className="cp-tit dep02">기본형</h2>
           <div className="component">
