@@ -6,7 +6,8 @@ import { SelectBox } from "../../../components/UI/SelectBox";
 
 export default function RadioChk() {
   const [subTab, setSubTab] = useState("CheckBox");
-
+  // const [activeSelect, setActiveSelect] = useState('선택');
+  // const selectList = ['선택','SKT','KT','LG U+','알뜰폰'];
   return (
     <>
       <ul className={`${styles.subTab} active`}>
@@ -161,12 +162,7 @@ export default function RadioChk() {
                   <input type="tel" className="_format _number" placeholder="메일아이디" maxLength="10"/>
                 </div>
                 <span className="field-txt">@</span>
-                <SelectBox>
-                  <option defaultChecked>선택해주세요</option>
-                  <option>naver.com</option>
-                  <option>daum.net</option>
-                  <option>gmail.com</option>
-                </SelectBox>
+                <SelectBox list={['선택해주세요','naver.com','daum.net','gmail.com']}/>
               </div>
             </Field>
           </div>
@@ -178,15 +174,7 @@ export default function RadioChk() {
           <div className={`${styles.box}`}>
             <Field label="휴대전화번호">
               <div className="field-outline">
-                <SelectBox type="custom" selectTitle="통신사를 선택해주세요">
-                  <ul className="select-lst">
-                    <li><a className="sel-opt _defaultTxt">{initText}</a></li>
-                    <li><a className="sel-opt">SKT</a></li>
-                    <li><a className="sel-opt">KT</a></li>
-                    <li><a className="sel-opt">LG U+</a></li>
-                    <li><a className="sel-opt">알뜰폰</a></li>
-                  </ul>
-                </SelectBox>
+                <SelectBox type="custom" selectTitle="통신사를 선택해주세요" list={['선택','SKT','KT','LG U+','알뜰폰']}/>
               </div>
             </Field>
           </div>
