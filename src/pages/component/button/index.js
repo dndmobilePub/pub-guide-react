@@ -7,7 +7,7 @@ export default function Buttons() {
   const [subTab, setSubTab] = useState("Button");
 
   return (
-    <>
+    <div id="cp-wrap">
       <ul className={`${styles.subTab} active`}>
         <li
           className={`item${subTab === "Button" ? " active" : ""}`}
@@ -17,154 +17,165 @@ export default function Buttons() {
         >
           Button
         </li>
-        <li
-          className={`item${subTab === "ButtonWrap" ? " active" : ""}`}
-          onClick={() => {
-            setSubTab("ButtonWrap");
-          }}
-        >
-          ButtonWrap
-        </li>
       </ul>
       <Guide type={`${subTab}`} component={subTab} />
-      <hr />
+      <section className="cp-content">
       {subTab === "Button" ? (
         <>
-          <h3>{subTab}</h3>
-          <br />
-          <h4>{subTab} : a(true)</h4>
-          <p>{`<Button a>기본a</Button> <Button a bgType={2}>긍정a</Button> <Button a bgType={3}>부정a</Button>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <Button a>기본a</Button>
-            <Button a bgType={2}>
-              긍정a
-            </Button>
-            <Button a bgType={3}>
-              부정a
-            </Button>
+          <h2 className="cp-tit dep02">BUTTON : Text</h2>
+          <div className="component">
+            <h3 className="cp-tit dep03">size : md</h3>
+            <ButtonWrap>
+              <Button a txtType={1} bgType={0}>
+                type1
+              </Button>
+              &nbsp;
+              <Button a txtType={2} bgType={0}>
+                type2
+              </Button>
+              &nbsp;
+              <Button a txtType={3} bgType={0}>
+                type3
+              </Button>
+            </ButtonWrap>
+            <hr className="hr divice"/>
+            <h3 className="cp-tit dep03">button.btn TYPE</h3>
+            <ButtonWrap>
+              <Button>기본BTN</Button>
+              <Button bgType={2}>긍정BTN</Button>
+              <Button bgType={3}>부정BTN</Button>
+            </ButtonWrap>
           </div>
           <br />
-          <h4>{subTab}: a(false) </h4>
-          <p>{`<Button>기본BTN</Button> <Button bgType={2}>긍정BTN</Button> <Button a bgType={3}>부정BTN</Button>`}</p>
           <br />
-          <div className={`${styles.box}`}>
-            <Button>기본BTN</Button>
-            <Button bgType={2}>긍정BTN</Button>
-            <Button bgType={3}>부정BTN</Button>
+          <h2 className="cp-tit dep02">BUTTON : 기본형</h2>
+          <div className="component">
+            <h3 className="cp-tit dep03">a.btn TYPE</h3>
+            <ButtonWrap>
+              <Button a>기본a</Button>
+              <Button a bgType={2}>
+                긍정a
+              </Button>
+              <Button a bgType={3}>
+                부정a
+              </Button>
+            </ButtonWrap>
+            <hr className="hr divice"/>
+            <h3 className="cp-tit dep03">button.btn TYPE</h3>
+            <ButtonWrap>
+              <Button>기본BTN</Button>
+              <Button bgType={2}>긍정BTN</Button>
+              <Button bgType={3}>부정BTN</Button>
+            </ButtonWrap>
           </div>
-          <br />
-          <h4>{subTab}: size (xs, sm, md, lg, xl)</h4>
-          <p>{`<Button size="xs">xs</Button>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <Button size="xs">xs</Button>
-            <Button size="sm">sm</Button>
-            <Button>md</Button>
-            <Button size="lg">lg</Button>
-            <Button size="xl">xl</Button>
+          <h2 className="cp-tit dep02">BUTTON : SHAPE / disabled</h2>
+          <div className="component">
+            <h3 className="cp-tit dep03">SHAPE BTN</h3>
+            <ButtonWrap>
+              <Button shape="round">라운드 버튼</Button>
+              <Button shape="shadow">쉐도우 버튼</Button>
+              <Button shape="line">라인 버튼</Button>
+            </ButtonWrap>
+            <hr className="hr divice"/>
+            <h3 className="cp-tit dep03">BTN : disabled</h3>
+            <ButtonWrap>
+              <Button bgType={1} disabled>기본 BTN</Button>
+              <Button bgType={2} disabled>긍정 BTN</Button>
+              <Button bgType={3} disabled>부정 BTN</Button>
+              <Button shape="round" disabled>라운드 버튼</Button>
+              <Button shape="shadow" disabled>쉐도우 버튼</Button>
+              <Button shape="line" disabled>라인 버튼</Button>
+            </ButtonWrap>
           </div>
-          <br />
-          <h4>{subTab}: txtType (1/2/3)</h4>
-          <p>{`<Button a txtType={1} bgType={0}>type1</Button>`}</p>
-          <br />
-          <Button a txtType={1} bgType={0}>
-            type1
-          </Button>
-          &nbsp;
-          <Button a txtType={2} bgType={0}>
-            type2
-          </Button>
-          &nbsp;
-          <Button a txtType={3} bgType={0}>
-            type3
-          </Button>
-          <br />
-          <br />
-          <br />
-          <h4>{subTab}: bgType (1/2/3)</h4>
-          <p>{`<Button bgType={1}>기본 BTN</Button>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <Button bgType={1}>기본 BTN</Button>
-            &nbsp;
-            <Button bgType={2}>긍정 BTN</Button>
-            &nbsp;
-            <Button bgType={3}>부정 BTN</Button>
+          <h2 className="cp-tit dep02">BUTTON : SIZE</h2>
+          <div className="component">
+            <h3 className="cp-tit dep03">SIZE : XS</h3>
+            <ButtonWrap>
+              <Button size="xs" bgType={1} disabled>기본 BTN</Button>
+              <Button size="xs" bgType={2} disabled>긍정 BTN</Button>
+              <Button size="xs" bgType={3} disabled>부정 BTN</Button>
+              <Button size="xs" shape="round" disabled>라운드 버튼</Button>
+              <Button size="xs" shape="shadow" disabled>쉐도우 버튼</Button>
+              <Button size="xs" shape="line" disabled>라인 버튼</Button>
+            </ButtonWrap>
+            <hr className="hr divice"/>
+            <h3 className="cp-tit dep03">SIZE : S</h3>
+            <ButtonWrap>
+              <Button size="sm" bgType={1}>기본 BTN</Button>
+              <Button size="sm" bgType={2}>긍정 BTN</Button>
+              <Button size="sm" bgType={3}>부정 BTN</Button>
+              <Button size="sm" shape="round">라운드 버튼</Button>
+              <Button size="sm" shape="shadow">쉐도우 버튼</Button>
+              <Button size="sm" shape="line">라인 버튼</Button>
+            </ButtonWrap>
+            <hr className="hr divice"/>
+            <h3 className="cp-tit dep03">SIZE : 기본</h3>
+            <ButtonWrap>
+              <Button bgType={1}>기본 BTN</Button>
+              <Button bgType={2}>긍정 BTN</Button>
+              <Button bgType={3}>부정 BTN</Button>
+              <Button shape="round">라운드 버튼</Button>
+              <Button shape="shadow">쉐도우 버튼</Button>
+              <Button shape="line">라인 버튼</Button>
+            </ButtonWrap>
+            <hr className="hr divice"/>
+            <h3 className="cp-tit dep03">SIZE : lg</h3>
+            <ButtonWrap>
+              <Button size="lg" bgType={1}>기본 BTN</Button>
+              <Button size="lg" bgType={2}>긍정 BTN</Button>
+              <Button size="lg" bgType={3}>부정 BTN</Button>
+              <Button size="lg" shape="round">라운드 버튼</Button>
+              <Button size="lg" shape="shadow">쉐도우 버튼</Button>
+              <Button size="lg" shape="line">라인 버튼</Button>
+            </ButtonWrap>
+            <hr className="hr divice"/>
+            <h3 className="cp-tit dep03">SIZE : big</h3>
+            <ButtonWrap>
+              <Button size="xl" bgType={1}>기본 BTN</Button>
+              <Button size="xl" bgType={2}>긍정 BTN</Button>
+              <Button size="xl" bgType={3}>부정 BTN</Button>
+              <Button size="xl" shape="round">라운드 버튼</Button>
+              <Button size="xl" shape="shadow">쉐도우 버튼</Button>
+              <Button size="xl" shape="line">라인 버튼</Button>
+            </ButtonWrap>
           </div>
-          <br />
-          <h4>{subTab}: disabled (시작 태그안에 disabled 추가)</h4>
-          <p>{`<Button bgType={1} disabled>기본 BTN disabled</Button>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <Button bgType={1} disabled>
-              기본 BTN disabled
-            </Button>
-            &nbsp;
-            <Button bgType={2} disabled>
-              긍정 BTN disabled
-            </Button>
-            &nbsp;
-            <Button bgType={3} disabled>
-              부정 BTN disabled
-            </Button>
-          </div>
-          <br />
-          <h4>
-            {subTab}: shape (&#34;&#34;, &#34;round&#34;, &#34;shadow&#34;,
-            &#34;line&#34; / 버튼 태그일때만 적용 가능)
-          </h4>
-          <p>{`<Button shape="round">기본 round BTN</Button>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <Button>기본 shape BTN</Button>
-            &nbsp;
-            <Button shape="round">기본 round BTN</Button>
-            &nbsp;
-            <Button shape="shadow">기본 shadow BTN</Button>
-            &nbsp;
-            <Button shape="line">기본 line BTN</Button>
-          </div>
-          <br />
-          <h4>{subTab}: full (시작 태그안에 full 추가)</h4>
-          <p>{`<Button full>기본 full BTN</Button>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <Button>기본 BTN</Button>
-            <br />
-            <br />
-            <Button full>기본 full BTN</Button>
+          <h2 className="cp-tit dep02">BUTTON : Mix</h2>
+          <div className="component">
+            <h3 className="cp-tit dep03">BTN split / grow</h3>
+            <ButtonWrap grow>
+              <Button bgType={1}>기본 BTN</Button>
+              <Button bgType={2}>긍정 BTN</Button>
+              <Button bgType={3}>부정 BTN</Button>
+              <Button shape="line" full>부정 BTN</Button>
+            </ButtonWrap>
+
+            <h3 className="cp-tit dep03">BTN full / 2분할</h3>
+            <ButtonWrap grow>
+              <Button bgType={1}>기본 BTN</Button>
+              <Button bgType={2}>긍정 BTN</Button>
+            </ButtonWrap>
+            <hr className="hr divice"/>
+
+            <h3 className="cp-tit dep03">BTN full / group</h3>
+            <ButtonWrap full>
+              <Button a bgType={1}>기본 a</Button>
+              <Button a bgType={2}>긍정 a</Button>
+              <Button a bgType={3}>부정 a</Button>
+            </ButtonWrap>
+            <hr className="hr divice"/>
+
+            <h3 className="cp-tit dep03">BTN full / el</h3>
+            <ButtonWrap>
+              <Button a bgType={1} full>기본 a</Button>
+              <Button a bgType={2} full>긍정 a</Button>
+              <Button a bgType={3} full>부정 a</Button>
+            </ButtonWrap>
           </div>
         </>
       ) : (
-        <>
-          <h3>{subTab}</h3>
-          <br />
-
-          <h4>{subTab} : grow(시작 태그안에 grow 추가)</h4>
-          <p>{`<ButtonWrap grow><Button>버튼</Button><Button>버튼</Button><Button>버튼</Button></ButtonWrap>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <ButtonWrap grow>
-              <Button>버튼</Button>
-              <Button>버튼</Button>
-              <Button>버튼</Button>
-            </ButtonWrap>
-          </div>
-          <br />
-
-          <h4>{subTab} : full(시작 태그안에 full 추가)</h4>
-          <p>{`<ButtonWrap full><Button>버튼</Button><Button>버튼</Button><Button>버튼</Button></ButtonWrap>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <ButtonWrap full>
-              <Button>버튼</Button>
-              <Button>버튼</Button>
-              <Button>버튼</Button>
-            </ButtonWrap>
-          </div>
-        </>
+        <></>
       )}
-    </>
+      </section>
+    </div>
   );
 }

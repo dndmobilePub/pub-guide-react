@@ -175,6 +175,10 @@ export const Tooltip = ({
             reverse ? "reverse" : ""
           } ${isOpenTooltip ? "_is-active" : ""}`}
           role="button"
+          data-focus={false}
+          data-direction={direction}
+          data-message={content}
+          data-toggle="tooltip"
           ref={iconRef}
         >
           <span className="hide">툴팁</span>
