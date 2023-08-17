@@ -1,12 +1,20 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { useInputContext } from "../../store/search-context";
 
 const Header = () => {
   const router = useRouter();
   const pathname = router.pathname.substring(1);
-  const [bar, setBar] = useState(1);
+  const [bar, setBar] = useState(pathname.startsWith("worksheet") ? 0 : pathname.startsWith("component") ? 1 : 2);
+  const [htmlClass, setHtmlClass] = useState('')
   const barRef = useRef(null);
+  const { inputValue, setInputValue } = useInputContext();
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    console.log()
+  };
+
   useEffect(() => {
     if (bar === 0) {
       barRef.current.style.left = "5.328px";
@@ -16,6 +24,15 @@ const Header = () => {
       barRef.current.style.left = "199.328px";
     }
   }, [bar]);
+
+  useEffect(()=>{
+    if(htmlClass){
+      document.querySelector("html").classList.add(htmlClass);
+    }
+    return () => {
+      document.querySelector("html").classList.remove("m");
+    };
+  },[htmlClass])
 
   return (
     <header id="pgHeader">
@@ -31,6 +48,12 @@ const Header = () => {
         <span className="hide">메뉴열기</span>
       </button>
       <div className="pg_util">
+        {pathname === "worksheet" && (
+          <div className="pg_search">
+            <input type="text" id="pgSearchINP" value={inputValue} onChange={handleInputChange} placeholder="검색어를 입력하세요"/>
+            <button type="button" id="btnPgSearch"><span className="hide">검색하기</span></button>
+          </div>
+        )}
         <div className="switch">
           <span
             className="bar"
@@ -81,6 +104,12 @@ const Header = () => {
             </li>
           </ul>
         </div>
+
+        {pathname === "worksheet" && (
+          <button type="button" className="btn_responsive" onClick={()=>{
+            htmlClass===""?setHtmlClass('m'):setHtmlClass('')
+          }}><i><i><i className="hide">모바일 미리보기</i></i></i></button>
+        )}
       </div>
     </header>
   );
