@@ -138,7 +138,6 @@ export default function Popup() {
               <Tooltip
                 label="아이콘 왼쪽, 텍스트가 매우매우매우매우매우매우매우매우매우매우매우 길 경우"
                 direction="left"
-                reverse
                 content="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message"
               />
             </div>
