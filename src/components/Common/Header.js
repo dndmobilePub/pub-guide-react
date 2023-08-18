@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { useInputContext } from "../../store/search-context";
+import { useSearchContext } from "../../store/SearchContext";
 
 const Header = () => {
   const router = useRouter();
@@ -9,7 +9,7 @@ const Header = () => {
   const [bar, setBar] = useState(pathname.startsWith("worksheet") ? 0 : pathname.startsWith("component") ? 1 : 2);
   const [htmlClass, setHtmlClass] = useState('')
   const barRef = useRef(null);
-  const { inputValue, setInputValue } = useInputContext();
+  const { inputValue, setInputValue } = useSearchContext();
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };

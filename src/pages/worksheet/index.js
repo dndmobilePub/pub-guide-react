@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ProjectStatus } from "../../components/Common/ProjectStatus";
 import data from "../../data/menu.common.json";
-import { useInputContext } from "../../store/search-context";
+import { useSearchContext } from "../../store/SearchContext";
 import HighlightSubstring from "../../utils/highlightSubstring";
 
 export default function Worksheet() {
@@ -56,7 +56,7 @@ export default function Worksheet() {
     setUniqueChange(Array.from(changeSet).sort());
   }, []);
 
-  const { inputValue, setInputValue } = useInputContext();
+  const { inputValue, setInputValue } = useSearchContext();
 
   return (
     <div className={`pg_content ${inputValue.length > 0 ? "searcher" : ""}`}>
