@@ -18,7 +18,10 @@ export const Field = ({
       }`}
     >
       {label && <label className="field-label">{label}</label>}
-      {wrap ? <div className={`${wrap ? "field-outline" : ""}`}>{children}</div> : <div className={`${group ? `field-group${type==="box"?" opt-box":type==="boxChk"?" opt-box chk":""}` : ""}`}>{children}</div>}
+      {wrap ? <div className={`${wrap ? "field-outline" : ""}`}>{children}</div> : 
+      group ? <div className={`field-group${type==="box"?" opt-box":type==="boxChk"?" opt-box chk":""}`}>{children}</div>
+      : children
+    }
       {valid && (
         <p className="field-msg">
           <span className="ico ico-error txt-r">{valid}</span>

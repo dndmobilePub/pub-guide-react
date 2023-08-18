@@ -42,34 +42,42 @@ export default function Inputs() {
           <br />
 
           <h4>{subTab} : placeholder</h4>
-          <p>{`<TextInput placeholder='기본동작 INPUT' />`}</p>
+          <p>{`<Field><TextInput placeholder='기본동작 INPUT' /></Field>`}</p>
           <br />
           <div className={`${styles.box}`}>
-            <TextInput placeholder="기본동작 INPUT" />
+            <Field>
+              <TextInput placeholder="기본동작 INPUT" />
+            </Field>
           </div>
           <br />
 
           <h4>{subTab} : clear</h4>
-          <p>{`<TextInput placeholder="예외 : clear btn 없음" clear={false} />`}</p>
+          <p>{`<Field><TextInput placeholder="예외 : clear btn 없음" clear={false} /></Field>`}</p>
           <br />
           <div className={`${styles.box}`}>
-            <TextInput placeholder="예외 : clear btn 없음" clear={false} />
+            <Field>
+              <TextInput placeholder="예외 : clear btn 없음" clear={false} />
+            </Field>
           </div>
           <br />
 
           <h4>{subTab} : readonly & value</h4>
-          <p>{`<TextInput value="readonly" readonly={true} />`}</p>
+          <p>{`<Field><TextInput value="readonly" readonly={true} /></Field>`}</p>
           <br />
           <div className={`${styles.box}`}>
-            <TextInput value="readonly" readonly={true} />
+            <Field>
+              <TextInput value="readonly" readonly={true} />
+            </Field>
           </div>
           <br />
 
           <h4>{subTab} : placeholder & disabled</h4>
-          <p>{`<TextInput placeholder="disabled" disabled={true} />`}</p>
+          <p>{`<Field><TextInput placeholder="disabled" disabled={true} /></Field>`}</p>
           <br />
           <div className={`${styles.box}`}>
-            <TextInput placeholder="disabled" disabled={true} />
+            <Field>
+              <TextInput placeholder="disabled" disabled={true} />
+            </Field>
           </div>
           <br />
 

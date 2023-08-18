@@ -8,17 +8,22 @@ export const Guide = (props) => {
       <h3>기본 적용 방법</h3>
       <br />
       <pre className={`${styles.pre}`}>
-        <code>{`import { ${props.component} } from "../components/UI"`}</code>
+        <code>{`import { ${
+          props.component === "Button"
+            ? "Button, ButtonWrap"
+            : `${props.component}`
+        } } from "../components/..."`}</code>
       </pre>
       <p className="pg_content">
-        * 사용하고자 하는 컴포넌트에서 위와 같이 경로를 가져옵니다.
+        * 사용하고자 하는 컴포넌트 경로를 component폴더 내에서 가져옵니다.
+        (페이지 위치 기준 상대경로)
       </p>
       <br />
       <pre className={`${styles.pre}`}>
         <code>
           {`return (${
-            props.component === "ButtonWrap"
-              ? "<ButtonWrap><Button>...</Button><Button>...</Button></ButtonWrap>"
+            props.component === "Button"
+              ? "<ButtonWrap><Button>...</Button></ButtonWrap>"
               : props.component === "TextInput" ||
                 props.component === "CustomInput"
               ? `<${props.component} />`
@@ -32,10 +37,10 @@ export const Guide = (props) => {
           * {props.type} 태그 내의 여러가지 선택 옵션을 사용하여 유동적인
           스타일링이 가능합니다.
         </li>
-        {props.type === "버튼" && (
+        {props.component === "Button" && (
           <li>
-            * &#60;ButtonWrap&#62;은 선택사항으로 &#60;Button&#62;태그를 감쌀 때
-            사용됩니다.
+            * &#60;ButtonWrap&#62;은 필수는 아닙니다. Mix형태의 버튼 배치가
+            필요할 때 &#60;Button&#62;태그를 감싸서 사용합니다.
           </li>
         )}
       </ul>
@@ -57,17 +62,11 @@ export const Guide = (props) => {
               <td>Any Text</td>
               <td>버튼 텍스트</td>
             </tr>
-          ) : props.component === "ButtonWrap" ? (
-            <tr>
-              <td>chidren</td>
-              <td>Component</td>
-              <td>버튼 컴포넌트</td>
-            </tr>
           ) : props.component === "Title" ? (
             <tr>
-              <td>chidren</td>
+              <td>text</td>
               <td>Any Text</td>
-              <td>타이틀 텍스트</td>
+              <td>타이틀 내용</td>
             </tr>
           ) : props.component === "TextInput" ||
             props.component === "CustomInput" ||
@@ -227,6 +226,27 @@ export const Guide = (props) => {
                 <td>타이틀 heading 설정(h1 ~ h5)</td>
               </tr>
               <tr>
+                <td>type</td>
+                <td>
+                  <strong>1(기본값)</strong> / 2
+                </td>
+                <td>타이틀 색상 설정</td>
+              </tr>
+              <tr>
+                <td>uline</td>
+                <td>
+                  <strong>-(기본값)</strong> / uline
+                </td>
+                <td>타이틀 밑줄 설정</td>
+              </tr>
+              <tr>
+                <td>split</td>
+                <td>
+                  <strong>-(기본값)</strong> / split
+                </td>
+                <td>타이틀 영역 좌우 분할 설정</td>
+              </tr>
+              <tr>
                 <td>sub</td>
                 <td>Any Text</td>
                 <td>서브 타이틀 설정</td>
@@ -254,27 +274,37 @@ export const Guide = (props) => {
             <>
               <tr>
                 <td>label</td>
-                <td>Any Text</td>
+                <td>
+                  <strong>- (기본값)</strong> / label = {`"`}Text{`"`}
+                </td>
                 <td>인풋 라벨 텍스트 설정</td>
               </tr>
               <tr>
                 <td>info</td>
-                <td>시작태그에 info 추가</td>
-                <td>하단에 info 메세지 표시</td>
+                <td>
+                  <strong>- (기본값)</strong> / info = {`"`}Text{`"`}
+                </td>
+                <td>하단에 정보 메세지 표시</td>
               </tr>
               <tr>
                 <td>valid</td>
-                <td>시작태그에 valid 추가</td>
-                <td>하단에 valid 메세지 표시</td>
+                <td>
+                  <strong>- (기본값)</strong> / valid = {`"`}Text{`"`}
+                </td>
+                <td>하단에 성공 메세지 표시</td>
               </tr>
               <tr>
                 <td>inValid</td>
-                <td>시작태그에 inValid 추가</td>
-                <td>하단에 inValid 메세지 표시</td>
+                <td>
+                  <strong>- (기본값)</strong> / inValid = {`"`}Text{`"`}
+                </td>
+                <td>하단에 오류 메세지 표시</td>
               </tr>
               <tr>
                 <td>wrap</td>
-                <td>시작태그에 wrap 추가</td>
+                <td>
+                  <strong>- (기본값)</strong> / wrap
+                </td>
                 <td>CustomInput 조합 레이아웃일때 사용</td>
               </tr>
             </>
@@ -440,7 +470,9 @@ export const Guide = (props) => {
               <tr>
                 <td>selectTitle</td>
                 <td>Any Text</td>
-                <td>커스텀 셀렉트박스일 경우 모달창 상단에 들어갈 타이틀 설정</td>
+                <td>
+                  커스텀 셀렉트박스일 경우 모달창 상단에 들어갈 타이틀 설정
+                </td>
               </tr>
             </>
           ) : props.component === "Accordion" ? (
