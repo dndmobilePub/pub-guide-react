@@ -24,6 +24,7 @@ export const Modal = ({
   const [modalTitleHeight, setModalTitleHeight] = useState(0);
   const [button1Height, setButton1Height] = useState(0);
   const [button2Height, setButton2Height] = useState(0);
+  const [modalStyle, setModalStyle] = useState({});
   useEffect(() => {
     if (isOpen === true) {
       setModalHeight(modalRef.current.clientHeight);
@@ -37,53 +38,55 @@ export const Modal = ({
       document.body.appendChild(dimmed);
       document.body.classList.add("no-scroll");
 
-      if(position !== "center"){
-        $(modalPopRef.current).animate(
-          position === "top" ? {
-            top: '0',
-            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
-          } : position === "left" ? {
-            left: '0',
-            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
-          } : {
-            bottom: '0',
-            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
-          } , 300).show();
-      }else{
-        $(modalPopRef.current).style = {
-          marginLeft: `-${modalWidth / 2}px`,
+      if(position === "center"){
+        setModalStyle({
+          top: "50%",
+          left: "50%",
+          marginLeft: `-${modalRef.current.clientWidth / 2}px`,
           marginTop: "0px",
-          height: "0px",
-        }
+          height: "auto",
+          display: "block",
+        })
+      }else if(position === "top"){
+        setModalStyle({
+          top: "0",
+          left: "0",
+          marginLeft: `0`,
+          marginTop: "0",
+          height: "auto",
+          display: "block",
+          transition: "all 300ms cubic-bezier(.17,.67,.65,.98)"
+        })
+      }else if(position === "left"){
+        setModalStyle({
+          top: "0",
+          left: "0",
+          marginLeft: `0`,
+          marginTop: "0",
+          height: "100%",
+          display: "block",
+          transition: "all 300ms cubic-bezier(.17,.67,.65,.98)"
+        })
+      }else{
+        setModalStyle({
+          top: "auto",
+          left: "0",
+          bottom: "0",
+          marginLeft: `0`,
+          marginTop: "0",
+          height: "auto",
+          display: "block",
+          transition: "all 300ms cubic-bezier(.17,.67,.65,.98)"
+        })
       }
+
       return () => {
         setModalHeight(0);
         document.body.removeChild(dimmed);
         document.body.classList.remove("no-scroll");
+        setModalStyle({});
       };
-    }else{
-      if(position !== "center"){
-        $(modalPopRef.current).animate(
-          position === "top" ? {
-            top: '-100%',
-            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
-          } : position === "left" ? {
-            left: '-100%',
-            height: "100%",
-            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)'
-          } : {
-            bottom: '-100%',
-            transition: 'opacity 250ms cubic-bezier(.86, 0, .07, 1)',
-            maxHeight: `${document.body.clientHeight - 100}px`
-          } , 300).hide();
-      }else{
-        $(modalPopRef.current).style = {
-          marginLeft: `-${modalWidth / 2}px`,
-          marginTop: "0px",
-          height: "0px",
-        }
-      }
-    }
+    }    
   }, [isOpen, modalHeight, position]);
 
   return (
@@ -95,6 +98,7 @@ export const Modal = ({
       aria-hidden={!isOpen}
       tabIndex={0}
       ref={modalPopRef}
+      style={modalStyle}
     >
       <div
         className="modalWrap"
