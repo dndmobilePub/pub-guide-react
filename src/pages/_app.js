@@ -23,28 +23,28 @@ export default function App({ Component, pageProps }) {
                 ? "component"
                 : pathname}
             </h2>
-            <div className="pg_project_status">
-              <div className="pg_count total">
-                <span className="lb">총본수</span><strong className="num">{totalCount}</strong>
+            {pathname === "worksheet" && (
+              <div className="pg_project_status">
+                <div className="pg_count total">
+                  <span className="lb">총본수</span><strong className="num">{totalCount}</strong>
+                </div>
+                <div className="pg_count working">
+                  <span className="lb">총진행본수</span><strong className="num">{curCount}</strong>
+                </div>
+                <div className="pg_count cp_num">
+                  <span className="lb">총완료본수</span><strong className="num">{completeCount}</strong>
+                </div>
+                <div className="pg_project_ing">
+                  <span className="ing">진행률 : <strong className="num">{curPercent}</strong>%</span> <span className="pgraph"><span className="bar" style={{width: `${curPercent}%`}}></span></span>
+                </div>
               </div>
-              <div className="pg_count working">
-                <span className="lb">총진행본수</span><strong className="num">{curCount}</strong>
-              </div>
-              <div className="pg_count cp_num">
-                <span className="lb">총완료본수</span><strong className="num">{completeCount}</strong>
-              </div>
-              <div className="pg_project_ing">
-                <span className="ing">진행률 : <strong className="num">{curPercent}</strong>%</span> <span className="pgraph"><span className="bar" style={{width: `${curPercent}%`}}></span></span>
-              </div>
-            </div>
+            )}
           </div>
           <div id="pgContainer">
-            <div className="pg_content">
-              {(pathname.startsWith("component") || pathname === "") && (
-                <Tabs pathname={pathname} />
-              )}
-              <Component {...pageProps} />
-            </div>
+            {(pathname.startsWith("component") || pathname === "") && (
+              <Tabs pathname={pathname} />
+            )}
+            <Component {...pageProps} />
           </div>
         </div>
       </InputProvider>

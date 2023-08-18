@@ -19,7 +19,7 @@ export default function Popup() {
     setIsOpenToast(!isOpenToast);
   };
   return (
-    <>
+    <div id="cp-wrap">
       <ul className={`${styles.subTab} active`}>
         <li
           className={`item${subTab === "Popup" ? " active" : ""}`}
@@ -156,6 +156,6 @@ export default function Popup() {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

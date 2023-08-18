@@ -12,7 +12,6 @@ const Header = () => {
   const { inputValue, setInputValue } = useInputContext();
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-    console.log()
   };
 
   useEffect(() => {

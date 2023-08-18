@@ -7,7 +7,7 @@ export default function Inputs() {
   const [subTab, setSubTab] = useState("Field");
 
   return (
-    <>
+    <div id="cp-wrap">
       <ul className={`${styles.subTab} active`}>
         <li
           className={`item${subTab === "Field" ? " active" : ""}`}
@@ -182,6 +182,6 @@ export default function Inputs() {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }
