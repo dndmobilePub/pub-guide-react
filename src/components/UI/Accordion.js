@@ -68,10 +68,12 @@ export const Accordion = ({
         $(".accordion-wrap[data-type='oneToggle'] .accordion-contents").slideUp(
           200
         );
-        setTimeout(() => {
-          setIsActive(true);
-          $(contentRef.current).slideDown();
-        }, 300);
+        if(contentRef.current.style.display === "none"){
+          setTimeout(() => {
+            setIsActive(true);
+            $(contentRef.current).slideDown();
+          }, 300);
+        }
       } else {
         setIsActive(!isActive);
         $(contentRef.current).slideToggle();
