@@ -3,7 +3,7 @@ import { Button, ButtonWrap } from "../../../components/UI/Button";
 import { Guide } from "../../../components/Common/Guide";
 import styles from "./index.module.scss";
 import { Modal, Toast } from "../../../components/UI/Popup";
-import { Tooltip, TooltipHtml, TooltipIcon } from "../../../components/UI/Tooltip";
+import { Tooltip, TooltipHtml } from "../../../components/UI/Tooltip";
 
 export default function Popup() {
   const [subTab, setSubTab] = useState("Popup");
@@ -24,32 +24,56 @@ export default function Popup() {
   // 툴팁 관련 js
   const tooltipRef1 = useRef(null);
   const tooltipRef2 = useRef(null);
+  const tooltipRef3 = useRef(null);
+  const tooltipRef4 = useRef(null);
+  const tooltipRef5 = useRef(null);
+  const tooltipRef6 = useRef(null);
+  const tooltipRef7 = useRef(null);
+  const tooltipRef8 = useRef(null);
+  const tooltipRef9 = useRef(null);
+  const tooltipRef10 = useRef(null);
+  const tooltipRef11 = useRef(null);
+  const tooltipRef12 = useRef(null);
 
   const [tooltip, setTooltip] = useState({
     id: 0,
     active: false,
+    reverse: false,
     dir: 'default',
-    label: '기본형',
-    html: `ToolTip Default :<br/><br/> 일이삼사오육칠팔구십일이삼사오<br/>ToolTip message`,
+    align : '',
+    label: '',
+    msg: '',
     top: 0,
     left: 0
   });
 
-  const toggleTooltip = (e, activeId) => {
-    console.log(e)
+  const tooltipReset = () => {
+    setTooltip({
+      ...prev,
+      active: false,
+      reverse: false,
+      dir: 'default',
+      align : '',
+      label: '',
+      msg: '',
+    })
+  }
+
+  const toggleTooltip = (e, activeId, dir, msg, reverse, label, align) => {
     const rect = e.target.getBoundingClientRect();
     if(tooltip.id === activeId && tooltip.active === true){
-      setTooltip({
-        ...prev,
-        active: false,
-      })
+      console.log('초기화');
+      tooltipReset();
     }else{
+      console.log('툴팁 생성');
       setTooltip({
-        ...prev,
         id: activeId,
-        dir: e.target.getAttribute("data-direction"),
         active: true,
-        html: e.target.getAttribute("data-message"),
+        reverse: reverse,
+        dir: dir,
+        align: align,
+        label: label,
+        msg: msg,
         top: rect.top + window.scrollY,
         left: rect.left + window.scrollX,
       })
@@ -80,11 +104,6 @@ export default function Popup() {
       <hr />
       {subTab === "Popup" ? (
         <>
-          <h3>{subTab}</h3>
-          <br />
-
-          <h4>{subTab} : type(Circle)</h4>
-          <p>{`<CheckBox type="circle" />`}</p>
           <br />
           <div className={`${styles.box}`}>
             <ButtonWrap>
@@ -157,62 +176,131 @@ export default function Popup() {
         </>
       ) : (
         <>
-          <h3>{subTab}</h3>
-          <br />
-
-          <h4>{subTab} : type(Circle line)</h4>
-          <p>{`<CheckBox type="circleLine" />`}</p>
           <br />
           <div>
-            <Tooltip label="기본형">
-              <TooltipIcon id={1} onclick={toggleTooltip} msg={`ToolTip Default :<br><br> 일이삼사오육칠팔구십일이삼사오<br>ToolTip message`} forwardRef={tooltipRef1}/>
-            </Tooltip>
-
-            <div className="tooltipWrap">
-              기본형 가운데 가운데가운데가운데&nbsp;
-              <a onClick={toggleTooltip}className="ico ico-tooltip" role="button" data-focus="false" data-direction="default" data-message="ToolTip message : Default <br> ToolTip message <br> ToolTip message" data-toggle="tooltip" aria-describedby="toolTip_1" ref={tooltipRef2}>
-                <span className="hide">툴팁</span>
-              </a>
-            </div>
-
-            {tooltip.active === true && (<TooltipHtml id={tooltip.id} dir={tooltip.dir} html={tooltip.html} top={tooltip.top} left={tooltip.left} onclick={()=>{setTooltip({
-              ...prev, 
-              active: false
+            <Tooltip 
+              tooltipId={1} 
+              label="기본형" 
+              msg={`ToolTip Default :<br><br> 일이삼사오육칠팔구십일이삼사오<br>ToolTip message`} 
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef1} 
+              tooltip={tooltip}
+            />
+            <Tooltip 
+              tooltipId={2} 
+              label="기본형 가운데 가운데가운데가운데" 
+              msg={`ToolTip message : Default <br> ToolTip message <br> ToolTip message`}
+              reverse
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef2} 
+              tooltip={tooltip}
+            />
+            <Tooltip 
+              tooltipId={3} 
+              label="기본형 텍스트 길다 기본형 텍스트 길다 기본형<br/> 텍스트 길다" 
+              msg={`ToolTip message : Default <br> ToolTip message <br> ToolTip message`} 
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef3} 
+              tooltip={tooltip}
+            />
+            <hr/>
+            <Tooltip 
+              tooltipId={4} 
+              label="왼쪽형"
+              msg={`ToolTip message : LEFT <br> ToolTip message <br> ToolTip message`} 
+              dir="left"
+              align="right"
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef4} 
+              tooltip={tooltip}
+            />
+            <Tooltip 
+              tooltipId={5} 
+              label="센터센터"
+              msg={`ToolTip message : LEFT <br> ToolTip message <br> ToolTip message`}
+              reverse
+              dir="left"
+              align="center"
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef5} 
+              tooltip={tooltip}
+            />
+            <Tooltip 
+              tooltipId={6} 
+              label="아이콘 왼쪽, 텍스트가 매우매우매우매우매우매우매우매우매우매우매우 길 경우"
+              msg={`ToolTip message : LEFT <br> ToolTip message <br> ToolTip message`}
+              reverse
+              dir="left"
+              align="right"
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef6} 
+              tooltip={tooltip}
+            />
+            <hr/>
+            <Tooltip 
+              tooltipId={7} 
+              label="위로"
+              msg={`ToolTip message : TOP <br> ToolTip message <br> ToolTip message`}
+              dir="top"
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef7} 
+              tooltip={tooltip}
+            />
+            <Tooltip 
+              tooltipId={8} 
+              label="위로 c"
+              msg={`ToolTip message : TOP <br> ToolTip message <br> ToolTip message`}
+              dir="top"
+              align="center"
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef8} 
+              tooltip={tooltip}
+            />
+            <Tooltip 
+              tooltipId={9} 
+              label="위로 r"
+              msg={`ToolTip message : TOP <br> ToolTip message <br> ToolTip message`}
+              dir="top"
+              align="right"
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef9} 
+              tooltip={tooltip}
+            />
+            <hr/>
+            <Tooltip 
+              tooltipId={10} 
+              label="아래로"
+              msg={`ToolTip message : BOTTOM <br> ToolTip message <br> ToolTip message`}
+              dir="bottom"
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef10} 
+              tooltip={tooltip}
+            />
+            <Tooltip 
+              tooltipId={11} 
+              label="아래로 c"
+              msg={`ToolTip message : BOTTOM <br> ToolTip message <br> ToolTip message`}
+              dir="bottom"
+              align="center"
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef11} 
+              tooltip={tooltip}
+            />
+            <Tooltip 
+              tooltipId={12} 
+              label="아래로 r"
+              msg={`ToolTip message : BOTTOM <br> ToolTip message <br> ToolTip message`}
+              dir="bottom"
+              align="right"
+              onclick={toggleTooltip} 
+              forwardRef={tooltipRef12} 
+              tooltip={tooltip}
+            />
+            {tooltip.active === true && (<TooltipHtml tooltip={tooltip} onclick={()=>{setTooltip({
+              ...prev,
+              active: false,
+              reverse: false
             })}}/>)}
-            {/* <Tooltip2 id={2} label="기본형 가운데 가운데가운데가운데" reverse html="ToolTip message : Default <br> ToolTip message <br> ToolTip message" active={false}/>
-            <Tooltip2 id={3} label="기본형 텍스트 길다 기본형 텍스트 길다 기본형<br/> 텍스트 길다" html="ToolTip message : Default <br> ToolTip message <br> ToolTip message" active={false}/>
-            <hr />
-            <Tooltip2 id={4} label="왼쪽형" dir="left" align="r" html="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message" active={false}/>
-            <Tooltip2 id={5} label="센터센터" dir="left" align="c" reverse html="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message" active={false}/>
-            <Tooltip2 id={6} label="아이콘 왼쪽, 텍스트가 매우매우매우매우매우매우매우매우매우매우매우 길 경우" dir="left" align="r" reverse html="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message" active={false}/>
-             */}
-            {/* <hr />  
-            <Tooltip label="기본형" content="ToolTip Default :<br><br> 일이삼사오육칠팔구십일이삼사오<br>ToolTip message"/>
-            <Tooltip label="기본형 가운데 가운데가운데가운데" reverse content="ToolTip message : Default <br> ToolTip message <br> ToolTip message"/>
-            <Tooltip label="기본형 텍스트 길다 기본형 텍스트<br>길다 기본형 텍스트 길다" content="ToolTip message : Default <br> ToolTip message <br> ToolTip message"/> */}
-            {/*
-            <hr />
-            <div>
-              <Tooltip label="왼쪽형" direction="left" labelPosition="r" content="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message"/>
-              <Tooltip label="센터센터" direction="left" reverse labelPosition="c" content="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message"/>
-              <Tooltip
-                label="아이콘 왼쪽, 텍스트가 매우매우매우매우매우매우매우매우매우매우매우 길 경우"
-                direction="left"
-                content="ToolTip message : LEFT <br> ToolTip message <br> ToolTip message"
-              />
-            </div>
-            <hr />
-            <div>
-              <Tooltip label="위로" direction="top" content="ToolTip message : TOP <br> ToolTip message <br> ToolTip message"/>
-              <Tooltip label="위로 c" direction="top" labelPosition="c" content="ToolTip message : TOP <br> ToolTip message <br> ToolTip message"/>
-              <Tooltip label="위로 r" direction="top" labelPosition="r" content="ToolTip message : TOP <br> ToolTip message <br> ToolTip message"/>
-            </div>
-            <hr />
-            <div>
-              <Tooltip label="아래로" direction="bottom" content="ToolTip message : BOTTOM <br> ToolTip message <br> ToolTip message"/>
-              <Tooltip label="아래로 c" direction="bottom" labelPosition="c" content="ToolTip message : BOTTOM <br> ToolTip message <br> ToolTip message"/>
-              <Tooltip label="아래로 r" direction="bottom" labelPosition="r" content="ToolTip message : BOTTOM <br> ToolTip message <br> ToolTip message"/>
-            </div> */}
           </div>
         </>
       )}
