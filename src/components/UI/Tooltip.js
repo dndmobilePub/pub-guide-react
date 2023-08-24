@@ -55,91 +55,65 @@ export const TooltipHtml = ({ tooltip, onclick }) => {
   const [tooltipHtmlWidth, setTooltipHtmlWidth] = useState(0);
   const [tooltipHtmlHeight, setTooltipHtmlHeight] = useState(0);
   const tooltipHtmlRef = useRef(null);
-
+  const [tooltipStyle, setTooltipStyle] = useState({
+    top: top,
+    left: left,
+  });
   useEffect(() => {
     setTooltipHtmlWidth(tooltipHtmlRef.current.clientWidth);
     setTooltipHtmlHeight(tooltipHtmlRef.current.clientHeight);
-  }, [tooltipHtmlRef]);
 
-  console.log(tooltipHtmlWidth, left, align, window.screenX, window.innerWidth)
-
-  // if(!((left + 20) >= (window.innerWidth/3)*2) && (tooltipHtmlWidth+15) >= left){
-  //   console.log('reverse?',true);
-  // }else{
-  //   console.log('reverse?',false);
-  // }
-  let tooltipStyles;
-
-  if(dir === "left"){ //왼쪽 툴팁
-    if(reverse){
-      tooltipStyles = {
-        top: top - (tooltipHtmlHeight / 2) + 10,
-        left: left + 30,
+    if(dir === "left"){ //왼쪽 툴팁
+      if(reverse){
+        setTooltipStyle({
+          top: top - (tooltipHtmlHeight / 2) + 10,
+          left: left + 30,
+        })
+        console.log('left reverse', tooltipStyle);
+      }else{
+        setTooltipStyle({
+          top: top - (tooltipHtmlHeight / 2) + 10, 
+          left: left - tooltipHtmlWidth - 12.5,
+        })
+        console.log('left', tooltipStyle);
       }
-      console.log('left reverse', tooltipStyles);
+    }else if(dir === "top"){ //위쪽 툴팁
+      setTooltipStyle({
+        top: top - tooltipHtmlHeight - 12.5,
+        left: align === "center" ? left - (tooltipHtmlWidth / 2) : align === "right" ? window.innerWidth - 220 : 30,
+      })
+      console.log('top', tooltipStyle);
+    }else if(dir === "bottom"){ //아래쪽 툴팁
+      setTooltipStyle({
+        top: top + (tooltipHtmlHeight / 2) - 10,
+        left: align === "center" ? left - (tooltipHtmlWidth / 2) : align === "right" ? window.innerWidth - 260 : 30,
+      })
+      console.log('top', tooltipStyle);
     }else{
-      tooltipStyles = {
-        top: top - (tooltipHtmlHeight / 2) + 10, 
-        left: left - tooltipHtmlWidth - 12.5,
+      if(reverse){ //오른쪽 툴팁
+        setTooltipStyle({
+          top: top - (tooltipHtmlHeight / 2) + 10,
+          left: left - tooltipHtmlWidth - 12.5
+        })
+        console.log('right reverse', tooltipStyle);
+      }else{
+        setTooltipStyle({
+          top: top - (tooltipHtmlHeight / 2) + 10,
+          left: align === "center" ? left : align === "right" ? 100 : left + 30,
+        })
+        console.log('right', tooltipStyle);
       }
-      console.log('left', tooltipStyles);
     }
-  }else if(dir === "top"){ //위쪽 툴팁
-    tooltipStyles = {
-      top: top - tooltipHtmlHeight - 12.5,
-      left: align === "center" ? left - (tooltipHtmlWidth / 2) : align === "right" ? window.innerWidth - 220 : 30,
-    }
-    console.log('top', tooltipStyles);
-  }else if(dir === "bottom"){ //아래쪽 툴팁
-    tooltipStyles = {
-      top: top + (tooltipHtmlHeight / 2) - 10,
-      left: align === "center" ? left - (tooltipHtmlWidth / 2) : align === "right" ? window.innerWidth - 260 : 30,
-    }
-    console.log('top', tooltipStyles);
-  }else{
-    if(reverse){ //오른쪽 툴팁
-      tooltipStyles = {
-        top: top - (tooltipHtmlHeight / 2) + 10,
-        left: left - tooltipHtmlWidth - 12.5
-      }
-      console.log('right reverse', tooltipStyles);
-    }else{
-      tooltipStyles = {
-        top: top - (tooltipHtmlHeight / 2) + 10,
-        left: align === "center" ? left : align === "right" ? 100 : left + 30,
-      }
-      console.log('right', tooltipStyles);
-    }
-  }
+  }, [tooltipHtmlRef, id, msg, dir, top, left, align, reverse, tooltipHtmlWidth, tooltipHtmlHeight]);
+
   return ReactDOM.createPortal(
     <div
       id={`toolTip_${id}`}
       className={`tooltip ${dir ? ` _` + dir : ""} _is-active`}
       tabIndex="0"
       role="tooltip"
-      style={tooltipStyles}
+      style={tooltipStyle}
       ref={tooltipHtmlRef}
-        // {
-        // top: dir === "top" 
-        // ? top - tooltipHtmlHeight - 12.5
-        // : dir === "bottom" ? top + 30 : top - tooltipHtmlHeight / 2 + 10 ,
-        // left:
-        //   dir === "left" 
-        //     ? reverse
-        //       ? left + 30
-        //       : left - tooltipHtmlWidth - 12.5
-        //     : dir === "top" 
-        //     ? reverse
-        //       ? left - tooltipHtmlWidth - 25
-        //       : align === "center" ? left - (tooltipHtmlWidth / 2) : align === "right" ? left - (tooltipHtmlWidth / 2) - 65 : 15
-        //     : dir === "bottom" 
-        //     ? reverse
-        //       ? left - tooltipHtmlWidth - 25
-        //       : align === "center" ? left - (tooltipHtmlWidth / 2) : align === "right" ? left - (tooltipHtmlWidth / 2) - 65 : 15
-        //     : reverse 
-        //     ? left - tooltipHtmlWidth - 12.5
-        //     : left + 30,
-        // }
     >
       <div className="tooltip-content">
         <p
