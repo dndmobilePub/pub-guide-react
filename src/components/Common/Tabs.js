@@ -59,6 +59,14 @@ const Tabs = (props) => {
       >
         <Link href={"/component/accordion"}>아코디언</Link>
       </SwiperSlide>
+      <SwiperSlide
+        tag="li"
+        className={`${
+          props.pathname === "component/tabmenu" ? "active" : ""
+        }`}
+      >
+        <Link href={"/component/tabmenu"}>탭 메뉴</Link>
+      </SwiperSlide>
     </Swiper>
   );
 };
