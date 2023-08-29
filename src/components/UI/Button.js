@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export const Button = ({
   a = false,
@@ -9,15 +10,16 @@ export const Button = ({
   shape = "",
   full = false,
   href = "",
-  onClick,
-  children,
+  onclick,
   modal,
+  children,
 }) => {
+  const router = useRouter();
   return (
     <>
       {a === true ? (
         <Link
-          onClick={onClick}
+          onClick={onclick}
           className={`btn btn-size ${size} ${
             txtType === 1
               ? "txt"
@@ -35,13 +37,14 @@ export const Button = ({
               ? "bg type3"
               : ""
           } ${shape} ${full ? "full" : ""}`}
-          href={href}
+          href={href ? `/${href}`:''}
+          passHref
         >
           {children}
         </Link>
       ) : (
         <button
-          onClick={onClick}
+          onClick={()=>onclick ? onclick() : href ? router.push(`/${href}`) :''}
           className={`btn btn-size ${size} ${
             bgType === 1
               ? "bg"

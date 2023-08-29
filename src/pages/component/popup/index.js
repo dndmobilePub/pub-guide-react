@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, ButtonWrap } from "../../../components/UI/Button";
-import { Guide } from "../../../components/Common/Guide";
+import { Options } from "../../../components/Common/Options";
 import styles from "./index.module.scss";
 import { Modal, Toast } from "../../../components/UI/Popup";
 import { Tooltip, TooltipHtml } from "../../../components/UI/Tooltip";
@@ -100,7 +100,7 @@ export default function Popup() {
           Tooltip
         </li>
       </ul>
-      <Guide type={`${subTab}`} component={subTab} />
+      <Options type={`${subTab}`} component={subTab} />
       <hr />
       {subTab === "Popup" ? (
         <>
