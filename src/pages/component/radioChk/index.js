@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CheckBox, CustomInput, Field, Radio, RadioBox } from "../../../components/UI/Form";
-import { Guide } from "../../../components/Common/Guide";
+import { Options } from "../../../components/Common/Options";
 import styles from "./index.module.scss";
 import { SelectBox } from "../../../components/UI/SelectBox";
 
@@ -42,7 +42,7 @@ export default function RadioChk() {
           SelectBox
         </li>
       </ul>
-      <Guide type={`${subTab}`} component={subTab} />
+      <Options type={`${subTab}`} component={subTab} />
       <section className="cp-content">
       {subTab === "CheckBox" ? (
         <>

@@ -1,51 +1,9 @@
-import styles from "./Guide.module.scss";
+import styles from "./Options.module.scss";
 
-export const Guide = (props) => {
+export const Options = (props) => {
   return (
     <div>
-      <h2>{props.type}</h2>
-      <br />
-      <h3>기본 적용 방법</h3>
-      <br />
-      <pre className={`${styles.pre}`}>
-        <code>{`import { ${
-          props.component === "Button"
-            ? "Button, ButtonWrap"
-            : `${props.component}`
-        } } from "../components/..."`}</code>
-      </pre>
-      <p className="pg_content">
-        * 사용하고자 하는 컴포넌트 경로를 component폴더 내에서 가져옵니다.
-        (페이지 위치 기준 상대경로)
-      </p>
-      <br />
-      <pre className={`${styles.pre}`}>
-        <code>
-          {`return (${
-            props.component === "Button"
-              ? "<ButtonWrap><Button>...</Button></ButtonWrap>"
-              : props.component === "TextInput" ||
-                props.component === "CustomInput"
-              ? `<${props.component} />`
-              : `<${props.component}>...</${props.component}>`
-          })`}
-        </code>
-      </pre>
-      <ul className="pg_content">
-        <li>* return 문 안에 위와 같이 JSX 컴포넌트를 삽입하여 사용합니다.</li>
-        <li>
-          * {props.type} 태그 내의 여러가지 선택 옵션을 사용하여 유동적인
-          스타일링이 가능합니다.
-        </li>
-        {props.component === "Button" && (
-          <li>
-            * &#60;ButtonWrap&#62;은 필수는 아닙니다. Mix형태의 버튼 배치가
-            필요할 때 &#60;Button&#62;태그를 감싸서 사용합니다.
-          </li>
-        )}
-      </ul>
-      <br />
-      <h3>필수 옵션</h3>
+      <h3>❗ 필수 옵션</h3>
       <table className={`${styles.table}`}>
         <caption>필수</caption>
         <thead>
@@ -126,7 +84,7 @@ export const Guide = (props) => {
         </tbody>
       </table>
 
-      <h3>선택 옵션</h3>
+      <h3>❔ 선택 옵션</h3>
       <table className={`${styles.table}`}>
         <caption>선택</caption>
         <thead>
@@ -197,6 +155,13 @@ export const Guide = (props) => {
                   <strong>false(기본값)</strong> / true
                 </td>
                 <td>버튼 너비 100% 여부</td>
+              </tr>
+              <tr>
+                <td>onclick</td>
+                <td>
+                  <strong>-(기본값)</strong> / function()
+                </td>
+                <td>버튼 클릭시 실행할 커스텀 함수</td>
               </tr>
             </>
           ) : props.component === "ButtonWrap" ? (

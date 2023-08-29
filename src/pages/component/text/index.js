@@ -1,4 +1,4 @@
-import { Guide } from "../../../components/Common/Guide";
+import { Options } from "../../../components/Common/Options";
 import { Title, Text } from "../../../components/UI/Text";
 import { useState } from "react";
 import styles from "./index.module.scss";
@@ -27,7 +27,7 @@ export default function Texts() {
           Text
         </li>
       </ul>
-      <Guide type={`${subTab}`} component={subTab} />
+      <Options type={`${subTab}`} component={subTab} />
       {subTab === "Title" ? (
         <section className="cp-content">
           <h2 className="cp-tit dep02">TITLE : 기본형 , #333</h2>

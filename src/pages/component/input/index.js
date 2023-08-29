@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CustomInput, Field, TextInput } from "../../../components/UI/Form";
-import { Guide } from "../../../components/Common/Guide";
+import { Options } from "../../../components/Common/Options";
 import styles from "./index.module.scss";
 
 export default function Inputs() {
@@ -34,7 +34,7 @@ export default function Inputs() {
           CustomInput
         </li>
       </ul>
-      <Guide type={`${subTab}`} component={subTab} />
+      <Options type={`${subTab}`} component={subTab} />
       <hr />
       {subTab === "TextInput" ? (
         <>

@@ -1,7 +1,8 @@
-import { Guide } from "../../../components/Common/Guide";
-import { Button, ButtonWrap } from "../../../components/UI/Button";
-import { useState } from "react";
 import styles from "./index.module.scss";
+import { useState } from "react";
+import { Button, ButtonWrap } from "../../../components/UI/Button";
+import { ButtonGuide } from "../../../components/Common/Guide/Button";
+import { Options } from "../../../components/Common/Options";
 
 export default function Buttons() {
   const [subTab, setSubTab] = useState("Button");
@@ -18,7 +19,8 @@ export default function Buttons() {
           Button
         </li>
       </ul>
-      <Guide type={`${subTab}`} component={subTab} />
+      <ButtonGuide />
+      {<Options type={`${subTab}`} component={subTab} />}
       <section className="cp-content">
       {subTab === "Button" ? (
         <>
