@@ -20,6 +20,12 @@ export const Options = (props) => {
               <td>Any Text</td>
               <td>버튼 텍스트</td>
             </tr>
+          ) : props.component === "ButtonWrap" ? (
+            <tr>
+              <td>chidren</td>
+              <td>Component</td>
+              <td>버튼 컴포넌트</td>
+            </tr>
           ) : props.component === "Title" ? (
             <tr>
               <td>text</td>
@@ -98,18 +104,18 @@ export const Options = (props) => {
           {props.component === "Button" ? (
             <>
               <tr>
+                <td>a</td>
+                <td>
+                  <strong>- (기본값)</strong> / a
+                </td>
+                <td>a태그 여부 설정, 별도 미설정시 a 버튼 태그로 표시됨</td>
+              </tr>
+              <tr>
                 <td>href</td>
                 <td>
                   <strong>&#34;#&#34;(기본값)</strong> / &#34;페이지 경로&#34;
                 </td>
                 <td>버튼 링크 텍스트</td>
-              </tr>
-              <tr>
-                <td>a</td>
-                <td>
-                  <strong>false(기본값)</strong> / true
-                </td>
-                <td>a태그 링크 여부, 기본 false로 버튼 태그로 표시됨</td>
               </tr>
               <tr>
                 <td>size</td>
@@ -135,31 +141,31 @@ export const Options = (props) => {
                 <td>버튼 배경색, a 태그인 경우 적용되지 않음</td>
               </tr>
               <tr>
-                <td>disabled</td>
-                <td>
-                  <strong>false(기본값)</strong> / true
-                </td>
-                <td>버튼 비활성화 여부</td>
-              </tr>
-              <tr>
                 <td>shape</td>
                 <td>
-                  <strong>&#34;&#34;(기본값)</strong> / &#34;round&#34; /
+                  <strong>- (기본값)</strong> / &#34;round&#34; /
                   &#34;shadow&#34; / &#34;line&#34;
                 </td>
                 <td>버튼 모양</td>
               </tr>
               <tr>
+                <td>disabled</td>
+                <td>
+                  <strong>- (기본값)</strong> / disabled
+                </td>
+                <td>버튼 비활성화 여부</td>
+              </tr>
+              <tr>
                 <td>full</td>
                 <td>
-                  <strong>false(기본값)</strong> / true
+                  <strong>- (기본값)</strong> / full
                 </td>
                 <td>버튼 너비 100% 여부</td>
               </tr>
               <tr>
                 <td>onclick</td>
                 <td>
-                  <strong>-(기본값)</strong> / function()
+                  <strong>- (기본값)</strong> / function()
                 </td>
                 <td>버튼 클릭시 실행할 커스텀 함수</td>
               </tr>
@@ -169,14 +175,14 @@ export const Options = (props) => {
               <tr>
                 <td>grow</td>
                 <td>
-                  <strong>&#34;&#34;(기본값)</strong> / grow
+                  <strong>- (기본값)</strong> / grow
                 </td>
                 <td>ButtonWrap 컴포넌트에 display flex 및 flex-grow 설정</td>
               </tr>
               <tr>
                 <td>full</td>
                 <td>
-                  <strong>&#34;&#34;(기본값)</strong> / full
+                  <strong>- (기본값)</strong> / full
                 </td>
                 <td>자식 컴포넌트에 width값 100% 적용</td>
               </tr>
