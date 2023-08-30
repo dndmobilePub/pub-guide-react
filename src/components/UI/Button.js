@@ -20,7 +20,9 @@ export const Button = ({
       {a === true ? (
         <Link
           onClick={onclick}
-          className={`btn btn-size ${size} ${
+          className={`btn btn-size ${
+            !size && size.length === 2 ? size : "md"
+          } ${
             txtType === 1
               ? "txt"
               : txtType === 2
@@ -37,15 +39,25 @@ export const Button = ({
               ? "bg type3"
               : ""
           } ${shape} ${full ? "full" : ""}`}
-          href={href ? `/${href}`:''}
+          href={href ? `/${href}` : ""}
           passHref
         >
           {children}
         </Link>
       ) : (
         <button
-          onClick={()=>onclick ? onclick() : href ? router.push(`/${href}`) :''}
-          className={`btn btn-size ${size} ${
+          onClick={() =>
+            onclick ? onclick() : href ? router.push(`/${href}`) : ""
+          }
+          className={`btn btn-size ${
+            size === "xs" ||
+            size === "sm" ||
+            size === "md" ||
+            size === "lg" ||
+            size === "xl"
+              ? size
+              : "md"
+          } ${
             bgType === 1
               ? "bg"
               : bgType === 2
