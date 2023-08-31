@@ -1,8 +1,18 @@
+import { ButtonGuide } from "./Guide/Button";
+import { TitleGuide } from "./Guide/Title";
+import { TextGuide } from "./Guide/Text";
+import { FieldGuide } from "./Guide/Field";
 import styles from "./Options.module.scss";
 
 export const Options = (props) => {
+  const { component } = props;
+  
   return (
-    <div>
+    <>
+      {(component === "Button" || component === "ButtonWrap") && (<ButtonGuide />)}
+      {component === "Title" && (<TitleGuide />)}
+      {component === "Text" && (<TextGuide />)}
+      {component === "Field" && (<FieldGuide />)}
       <h3>❗ 필수 옵션</h3>
       <table className={`${styles.table}`}>
         <caption>필수</caption>
@@ -14,39 +24,39 @@ export const Options = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.component === "Button" ? (
+          {component === "Button" ? (
             <tr>
               <td>chidren</td>
               <td>Any Text</td>
               <td>버튼 텍스트</td>
             </tr>
-          ) : props.component === "ButtonWrap" ? (
+          ) : component === "ButtonWrap" ? (
             <tr>
               <td>chidren</td>
               <td>Component</td>
               <td>버튼 컴포넌트</td>
             </tr>
-          ) : props.component === "Title" ? (
+          ) : component === "Title" ? (
             <tr>
               <td>text</td>
               <td>Any Text</td>
               <td>타이틀 내용</td>
             </tr>
-          ) : props.component === "TextInput" ||
-            props.component === "CustomInput" ||
-            props.component === "Radio" ? (
+          ) : component === "TextInput" ||
+            component === "CustomInput" ||
+            component === "Radio" ? (
             <tr>
               <td>-</td>
               <td>-</td>
               <td>-</td>
             </tr>
-          ) : props.component === "Field" ? (
+          ) : component === "Field" ? (
             <tr>
               <td>children</td>
               <td>JSX Component</td>
               <td>인풋 컴포넌트</td>
             </tr>
-          ) : props.component === "RadioBox" ? (
+          ) : component === "RadioBox" ? (
             <>
               <tr>
                 <td>children</td>
@@ -59,7 +69,7 @@ export const Options = (props) => {
                 <td>라디오 버튼을 활성화하기 위한 name 설정</td>
               </tr>
             </>
-          ) : props.component === "SelectBox" ? (
+          ) : component === "SelectBox" ? (
             <>
               <tr>
                 <td>list</td>
@@ -67,7 +77,7 @@ export const Options = (props) => {
                 <td>SelectBox 옵션에 들어갈 문자열 형태의 배열</td>
               </tr>
             </>
-          ) : props.component === "Accordion" ? (
+          ) : component === "Accordion" ? (
             <>
               <tr>
                 <td>title</td>
@@ -101,7 +111,7 @@ export const Options = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.component === "Button" ? (
+          {component === "Button" ? (
             <>
               <tr>
                 <td>a</td>
@@ -170,7 +180,7 @@ export const Options = (props) => {
                 <td>버튼 클릭시 실행할 커스텀 함수</td>
               </tr>
             </>
-          ) : props.component === "ButtonWrap" ? (
+          ) : component === "ButtonWrap" ? (
             <>
               <tr>
                 <td>grow</td>
@@ -187,7 +197,7 @@ export const Options = (props) => {
                 <td>자식 컴포넌트에 width값 100% 적용</td>
               </tr>
             </>
-          ) : props.component === "Title" ? (
+          ) : component === "Title" ? (
             <>
               <tr>
                 <td>depth</td>
@@ -223,7 +233,7 @@ export const Options = (props) => {
                 <td>서브 타이틀 설정</td>
               </tr>
             </>
-          ) : props.component === "Text" ? (
+          ) : component === "Text" ? (
             <>
               <tr>
                 <td>lang</td>
@@ -241,35 +251,28 @@ export const Options = (props) => {
                 <td>말줄임 설정</td>
               </tr>
             </>
-          ) : props.component === "Field" ? (
+          ) : component === "Field" ? (
             <>
               <tr>
                 <td>label</td>
                 <td>
-                  <strong>- (기본값)</strong> / label = {`"`}Text{`"`}
+                  <strong>- (기본값)</strong> / Any Text
                 </td>
                 <td>인풋 라벨 텍스트 설정</td>
               </tr>
               <tr>
                 <td>info</td>
                 <td>
-                  <strong>- (기본값)</strong> / info = {`"`}Text{`"`}
+                  <strong>- (기본값)</strong> / Any Text
                 </td>
                 <td>하단에 정보 메세지 표시</td>
               </tr>
               <tr>
                 <td>valid</td>
                 <td>
-                  <strong>- (기본값)</strong> / valid = {`"`}Text{`"`}
+                  <strong>- (기본값)</strong> / {`{활성화 여부 , 성공 메시지, 실패 메시지}`}
                 </td>
-                <td>하단에 성공 메세지 표시</td>
-              </tr>
-              <tr>
-                <td>inValid</td>
-                <td>
-                  <strong>- (기본값)</strong> / inValid = {`"`}Text{`"`}
-                </td>
-                <td>하단에 오류 메세지 표시</td>
+                <td>하단에 성공/실패 메세지 표시</td>
               </tr>
               <tr>
                 <td>wrap</td>
@@ -279,7 +282,7 @@ export const Options = (props) => {
                 <td>CustomInput 조합 레이아웃일때 사용</td>
               </tr>
             </>
-          ) : props.component === "TextInput" ? (
+          ) : component === "TextInput" ? (
             <>
               <tr>
                 <td>type</td>
@@ -338,7 +341,7 @@ export const Options = (props) => {
                 <td>input 외부에 wrap 클래스 유무 설정</td>
               </tr>
             </>
-          ) : props.component === "CustomInput" ? (
+          ) : component === "CustomInput" ? (
             <>
               <tr>
                 <td>type</td>
@@ -364,7 +367,7 @@ export const Options = (props) => {
                 <td>커스텀 패스워드 인풋에서 전체 글자수</td>
               </tr>
             </>
-          ) : props.component === "CheckBox" ? (
+          ) : component === "CheckBox" ? (
             <>
               <tr>
                 <td>type</td>
@@ -397,7 +400,7 @@ export const Options = (props) => {
                 <td>체크박스 disabled 설정</td>
               </tr>
             </>
-          ) : props.component === "RadioBox" ? (
+          ) : component === "RadioBox" ? (
             <>
               <tr>
                 <td>type</td>
@@ -408,7 +411,7 @@ export const Options = (props) => {
                 <td>라디오 비주얼 타입 지정</td>
               </tr>
             </>
-          ) : props.component === "Radio" ? (
+          ) : component === "Radio" ? (
             <>
               <tr>
                 <td>label</td>
@@ -431,7 +434,7 @@ export const Options = (props) => {
                 <td>라디오 disabled 설정</td>
               </tr>
             </>
-          ) : props.component === "SelectBox" ? (
+          ) : component === "SelectBox" ? (
             <>
               <tr>
                 <td>type</td>
@@ -446,7 +449,7 @@ export const Options = (props) => {
                 </td>
               </tr>
             </>
-          ) : props.component === "Accordion" ? (
+          ) : component === "Accordion" ? (
             <>
               <tr>
                 <td>scroll</td>
@@ -504,6 +507,6 @@ export const Options = (props) => {
           )}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
