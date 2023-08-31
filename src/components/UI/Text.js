@@ -1,45 +1,35 @@
 import React from "react";
-
-export const Title = ({ depth = 1, text, type, uline, split, children, sub }) => {
-  let headingElement;
-  let subElement
-  if (sub) {
-    subElement = React.createElement("p", { className: "tit sub" }, sub);
-    headingElement = React.createElement(
-      `h${depth}`,
-      { className: `tit dep0${depth}` },
-      subElement,
-      text
-    );
-  } else if(uline){
-    subElement = React.createElement("span", { className: "uline" }, text);
-    headingElement = React.createElement(
-      `h${depth}`,
-      { className: `tit dep0${depth}` },
-      subElement,
-    );
-  } else if(split) {
-    subElement = React.createElement("div", { className: "col" }, children);
-    headingElement = React.createElement(
-      `h${depth}`,
-      { className: `tit dep0${depth}` },
-      text
-    );
-  } else {
-    headingElement = React.createElement(
-      `h${depth}`,
-      { className: `tit dep0${depth}${type===2?' type2':''}` },
-      text,
-      children
-    );
-  }
-  return (
-    split ? (
-      <div className="hgroup split">{headingElement} {subElement}</div>
-    ) : ( 
-      headingElement
+export const Title = ({
+  depth = 1,
+  text,
+  type = 1,
+  uline,
+  split,
+  children,
+  sub,
+}) => {
+  const Heading = `h${depth}`;
+  if(split){
+    return (
+      <div className="hgroup split">
+        <Heading className={`tit dep0${depth}`} >
+          {sub ? <p className="tit sub">{sub}</p> : null}
+          {uline ? (<span className="uline">{text}</span>) : text}
+        </Heading>
+        <div className="col">
+          {children}
+        </div>
+      </div>
     )
-  );
+  }else{
+    return (
+      <Heading className={`tit dep0${depth}`} >
+        {sub ? <p className="tit sub">{sub}</p> : null}
+        {uline ? (<span className="uline">{text}</span>) : text}
+        {children}
+      </Heading>
+    ) 
+  }
 };
 
 export const Text = ({ children, lang = "", ell = 0 }) => {

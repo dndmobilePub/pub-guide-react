@@ -8,28 +8,31 @@ export default function Inputs() {
 
   return (
     <div id="cp-wrap">
-      <ul className={`${styles.subTab} active`}>
+      <ul className={`${styles.subTab}`}>
         <li
-          className={`item${subTab === "Field" ? " active" : ""}`}
+          className="item"
           onClick={() => {
             setSubTab("Field");
           }}
+          style={{ fontWeight: subTab === "Field" ? "bold" : "normal" }}
         >
           Field
         </li>
         <li
-          className={`item${subTab === "TextInput" ? " active" : ""}`}
+          className="item"
           onClick={() => {
             setSubTab("TextInput");
           }}
+          style={{ fontWeight: subTab === "TextInput" ? "bold" : "normal" }}
         >
           TextInput
         </li>
         <li
-          className={`item${subTab === "CustomInput" ? " active" : ""}`}
+          className="item"
           onClick={() => {
             setSubTab("CustomInput");
           }}
+          style={{ fontWeight: subTab === "CustomInput" ? "bold" : "normal" }}
         >
           CustomInput
         </li>
@@ -38,8 +41,7 @@ export default function Inputs() {
       <hr />
       {subTab === "TextInput" ? (
         <>
-          <h3>{subTab}</h3>
-          <br />
+          <h2 class="cp-tit dep02">{subTab}</h2>
 
           <h4>{subTab} : placeholder</h4>
           <p>{`<Field><TextInput placeholder='기본동작 INPUT' /></Field>`}</p>
@@ -113,43 +115,34 @@ export default function Inputs() {
         </>
       ) : subTab === "Field" ? (
         <>
-          <h3>{subTab}</h3>
-          <br />
-          <h4>{subTab} : label</h4>
-          <p>{`<Field label='labelText'><TextInput /></Field>`}</p>
+          <h2 class="cp-tit dep02">{subTab}</h2>
           <br />
           <div className={`${styles.box}`}>
             <Field label={`labelText`}>
               <TextInput />
             </Field>
-          </div>
-          <br />
-          <br />
-          <h4>{subTab} : info</h4>
-          <p>{`<Field info="안내성 메세지"><TextInput /></Field>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
+            <hr />
             <Field info="안내성 메세지">
               <TextInput />
             </Field>
-          </div>
-          <br />
-          <br />
-          <h4>{subTab} : valid</h4>
-          <p>{`<Field valid="입력값의 유효성이 정상입니다."><TextInput /></Field>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <Field valid="입력값의 유효성이 정상입니다.">
+            <hr />
+            <Field
+              valid={{
+                status: 1,
+                validMsg: "입력값의 유효성이 정상입니다.",
+                inValidMsg: "",
+              }}
+            >
               <TextInput />
             </Field>
-          </div>
-          <br />
-          <br />
-          <h4>{subTab} : inValid</h4>
-          <p>{`<Field inValid="오류체크 메세지 출력"><TextInput /></Field>`}</p>
-          <br />
-          <div className={`${styles.box}`}>
-            <Field inValid="오류체크 메세지 출력">
+            <hr />
+            <Field
+              valid={{
+                status: 2,
+                validMsg: "",
+                inValidMsg: "오류체크 메세지 출력",
+              }}
+            >
               <TextInput />
             </Field>
           </div>

@@ -5,7 +5,6 @@ export const Field = ({
   children,
   info,
   valid,
-  inValid,
   wrap,
   type,
   group,
@@ -13,23 +12,42 @@ export const Field = ({
 }) => {
   return (
     <div
-      className={`field${valid ? " valid" : ""}${inValid ? " invalid" : ""}${(type==="box" || type==="boxChk") || !type ? "" : ' '+type}${
-        className ? ' '+className : ""
+      className={`field${valid && valid.status === 1 ? " valid" : ""}${
+        valid && valid.status === 2 ? " invalid" : ""
+      }${type === "box" || type === "boxChk" || !type ? "" : " " + type}${
+        className ? " " + className : ""
       }`}
     >
       {label && <label className="field-label">{label}</label>}
-      {wrap ? <div className={`${wrap ? "field-outline" : ""}`}>{children}</div> : 
-      group ? <div className={`field-group${type==="box"?" opt-box":type==="boxChk"?" opt-box chk":""}`}>{children}</div>
-      : children
-    }
-      {valid && (
+      {wrap ? (
+        <div className={`${wrap ? "field-outline" : ""}`}>{children}</div>
+      ) : group ? (
+        <div
+          className={`field-group${
+            type === "box"
+              ? " opt-box"
+              : type === "boxChk"
+              ? " opt-box chk"
+              : ""
+          }`}
+        >
+          {children}
+        </div>
+      ) : (
+        children
+      )}
+      {valid && valid.status === 1 && valid.validMsg && (
         <p className="field-msg">
-          <span className="ico ico-error txt-r">{valid}</span>
+          <span className="ico ico-error txt-r">
+            {valid.validMsg}
+          </span>
         </p>
       )}
-      {inValid && (
+      {valid && valid.status === 2 && valid.inValidMsg &&(
         <p className="field-msg">
-          <span className="ico ico-error txt-r">{inValid}</span>
+          <span className="ico ico-error txt-r">
+            {valid.inValidMsg}
+          </span>
         </p>
       )}
       {info && (
@@ -236,41 +254,41 @@ export const CheckBox = ({
   }, [checked]);
   const [isChecked, setIsChecked] = useState(checked ?? false);
   return (
-      <label
+    <label
+      onChange={() => {
+        setIsChecked(!isChecked);
+        onChange && onChange();
+      }}
+      className={`${
+        type.startsWith("switch")
+          ? `field-switch${type.endsWith("-text") ? " txt" : ""}${
+              type.endsWith("-lg") ? " lg" : ""
+            }`
+          : `field-checkbox${type ? " " + type : ""}`
+      }`}
+    >
+      <input
+        type="checkbox"
         onChange={() => {
           setIsChecked(!isChecked);
           onChange && onChange();
         }}
-        className={`${
-          type.startsWith("switch")
-            ? `field-switch${type.endsWith("-text") ? " txt" : ""}${
-                type.endsWith("-lg") ? " lg" : ""
-              }`
-            : `field-checkbox${type ? ' '+type : ''}`
-        }`}
-      >
-        <input
-          type="checkbox"
-          onChange={() => {
-            setIsChecked(!isChecked);
-            onChange && onChange();
-          }}
-          checked={!readOnly && isChecked}
-          disabled={disabled}
-        />
-        <i className="field-icon"></i>
-        {label && <span className="field-label">{label}</span>}
-      </label>
+        checked={!readOnly && isChecked}
+        disabled={disabled}
+      />
+      <i className="field-icon"></i>
+      {label && <span className="field-label">{label}</span>}
+    </label>
   );
 };
 
 export const RadioBox = ({ type = "circle", name, children }) => {
   return (
-      <>
-        {React.Children.map(children, (child) => {
-          return React.cloneElement(child, { type, name });
-        })}
-      </>
+    <>
+      {React.Children.map(children, (child) => {
+        return React.cloneElement(child, { type, name });
+      })}
+    </>
   );
 };
 

@@ -1,7 +1,6 @@
 import styles from "./index.module.scss";
 import { useState } from "react";
 import { Button, ButtonWrap } from "../../../components/UI/Button";
-import { ButtonGuide } from "../../../components/Common/Guide/Button";
 import { Options } from "../../../components/Common/Options";
 
 export default function Buttons() {
@@ -9,11 +8,6 @@ export default function Buttons() {
 
   return (
     <div id="cp-wrap">
-      <ButtonGuide />
-      <hr />
-      <br />
-      <h3>📖 컴포넌트별 옵션 리스트</h3>
-      <br />
       <ul className={`${styles.subTab} active`}>
         <li
           className="item"
@@ -34,7 +28,6 @@ export default function Buttons() {
           ButtonWrap
         </li>
       </ul>
-      <br />
       {<Options type={`${subTab}`} component={subTab} />}
       <hr />
       <br />
