@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 export const Field = ({
   label,
+  labelFor,
   children,
   info,
   valid,
@@ -14,13 +15,34 @@ export const Field = ({
     <div
       className={`field${valid && valid.status === 1 ? " valid" : ""}${
         valid && valid.status === 2 ? " invalid" : ""
-      }${type === "box" || type === "boxChk" || !type ? "" : " " + type}${
-        className ? " " + className : ""
-      }`}
+      }${
+        type === "box" || type === "boxChk" || type === "tel" || !type
+          ? ""
+          : " " + type
+      }${className ? " " + className : ""}`}
     >
       {label && <label className="field-label">{label}</label>}
       {wrap ? (
-        <div className={`${wrap ? "field-outline" : ""}`}>{children}</div>
+        <div
+          className={`${
+            wrap
+              ? type === "tel"
+                ? "field-outline _inputLen"
+                : "field-outline"
+              : ""
+          }`}
+        >
+          {labelFor && (
+            <label
+              className={`field-label`}
+              htmlFor={labelFor[0]}
+              data-name={labelFor[0]}
+            >
+              {labelFor[1]}
+            </label>
+          )}
+          {children}
+        </div>
       ) : group ? (
         <div
           className={`field-group${
@@ -38,16 +60,12 @@ export const Field = ({
       )}
       {valid && valid.status === 1 && valid.validMsg && (
         <p className="field-msg">
-          <span className="ico ico-error txt-r">
-            {valid.validMsg}
-          </span>
+          <span className="ico ico-error txt-r">{valid.validMsg}</span>
         </p>
       )}
-      {valid && valid.status === 2 && valid.inValidMsg &&(
+      {valid && valid.status === 2 && valid.inValidMsg && (
         <p className="field-msg">
-          <span className="ico ico-error txt-r">
-            {valid.inValidMsg}
-          </span>
+          <span className="ico ico-error txt-r">{valid.inValidMsg}</span>
         </p>
       )}
       {info && (
@@ -62,36 +80,85 @@ export const Field = ({
 export const TextInput = ({
   type = "text",
   placeholder,
-  minLength,
+  min,
+  max,
   maxLength,
-  value,
+  initText = "",
+  label = "",
+  id,
   readonly = false,
   disabled = false,
   clear = true,
   alignRight,
   noWrap,
+  wrapperClass,
+  onChange,
+  onBlur,
 }) => {
-  const [textValue, setTextValue] = useState(value ? value : "");
+  const inputRef = useRef(null);
+  const [textValue, setTextValue] = useState(initText ? initText : "");
   const [isTextFocus, setIsTextFocus] = useState(false);
 
   const onChangeInput = (e) => {
     setIsTextFocus(true);
-    setTextValue(e.target.value);
+    setTextValue(
+      type === "number"
+        ? Number(e.target.value.slice(0, maxLength))
+        : e.target.value
+    );
+    //console.log(textValue);
   };
+
+  useEffect(() => {
+    if (initText) {
+      setTextValue(initText);
+    }
+  }, [initText]);
 
   return (
     <>
       {noWrap ? (
-        <div className="field-input grow _input">
+        <div className={`field-input grow _input`}>
+          {/* {label && (
+            <label
+              className={`field-label${isTextFocus ? " _is-active" : ""}`}
+              htmlFor={id}
+              data-name={id}
+            >
+              {label}
+            </label>
+          )} */}
           <input
+            id={id}
             type={type}
             placeholder={placeholder}
             title=""
-            onFocus={() => setIsTextFocus(true)}
+            onFocus={() => {
+              setIsTextFocus(true);
+              if (document.querySelector(`.field-label[data-name=${id}]`)) {
+                document
+                  .querySelector(`.field-label[data-name=${id}]`)
+                  .classList.add("_is-active");
+              }
+            }}
             onChange={(e) => {
+              onChange && onChange();
               onChangeInput(e);
             }}
             onBlur={() => {
+              onBlur && onBlur();
+              if (
+                document.querySelector(
+                  `.field-label[data-name="mobileNum1"]`
+                ) &&
+                document.querySelector(`#mobileNum1`).value === "" &&
+                document.querySelector(`#mobileNum2`).value === "" &&
+                document.querySelector(`#mobileNum3`).value === ""
+              ) {
+                document
+                  .querySelector(`.field-label[data-name="mobileNum1"]`)
+                  .classList.remove("_is-active");
+              }
               setTimeout(() => {
                 isTextFocus === true && setIsTextFocus(false);
               }, 1000);
@@ -99,7 +166,8 @@ export const TextInput = ({
             value={textValue}
             readOnly={readonly}
             disabled={disabled}
-            minLength={minLength}
+            min={min}
+            max={max}
             maxLength={maxLength}
             style={
               textValue.length > 0 && clear
@@ -111,6 +179,7 @@ export const TextInput = ({
             }${type === "password" ? " _password" : ""}${
               alignRight ? " alR" : ""
             }`}
+            ref={inputRef}
           />
 
           {isTextFocus && textValue.length > 0 && clear && (
@@ -118,8 +187,9 @@ export const TextInput = ({
               type="button"
               className="field-btn _input-clear _active"
               onClick={() => {
-                setIsTextFocus(false);
+                //setIsTextFocus(false);
                 setTextValue("");
+                inputRef.current.focus();
               }}
             >
               <span className="hide">입력값삭제</span>
@@ -127,55 +197,73 @@ export const TextInput = ({
           )}
         </div>
       ) : (
-        <div
-          className={`field-outline${readonly === true ? " readonly" : ""}${
-            disabled === true ? " disabled" : ""
-          }`}
-        >
-          <div className="field-input grow _input">
-            <input
-              type={type}
-              placeholder={placeholder}
-              title=""
-              onFocus={() => setIsTextFocus(true)}
-              onChange={(e) => {
-                onChangeInput(e);
-              }}
-              onBlur={() => {
-                setTimeout(() => {
-                  isTextFocus === true && setIsTextFocus(false);
-                }, 1000);
-              }}
-              value={textValue}
-              readOnly={readonly}
-              disabled={disabled}
-              maxLength={maxLength}
-              style={
-                textValue.length > 0 && clear
-                  ? { width: "calc(100% - 2.4rem)" }
-                  : { width: "100%" }
-              }
-              className={`${type !== "text" ? "_format" : ""}${
-                type === "number" ? " _number" : ""
-              }${type === "password" ? " _password" : ""}${
-                alignRight ? " alR" : ""
-              }`}
-            />
-
-            {isTextFocus && textValue.length > 0 && clear && (
-              <button
-                type="button"
-                className="field-btn _input-clear _active"
-                onClick={() => {
-                  setIsTextFocus(false);
-                  setTextValue("");
-                }}
+        <>
+          <div
+            className={`field-outline${wrapperClass ? " " + wrapperClass : ""}${
+              readonly === true ? " readonly" : ""
+            }${disabled === true ? " disabled" : ""}`}
+          >
+            {label && (
+              <label
+                className={`field-label${isTextFocus ? " _is-active" : ""}`}
+                htmlFor={id}
+                data-name={id}
               >
-                <span className="hide">입력값삭제</span>
-              </button>
+                {label}
+              </label>
             )}
+            <div className="field-input grow _input">
+              <input
+                id={id}
+                type={type}
+                placeholder={placeholder}
+                title=""
+                onFocus={() => setIsTextFocus(true)}
+                onChange={(e) => {
+                  onChange && onChange();
+                  onChangeInput(e);
+                }}
+                onBlur={() => {
+                  onBlur && onBlur();
+                  setTimeout(() => {
+                    isTextFocus === true && !textValue && setIsTextFocus(false);
+                  }, 1000);
+                }}
+                value={textValue}
+                readOnly={readonly}
+                disabled={disabled}
+                min={min}
+                max={max}
+                maxLength={maxLength}
+                style={
+                  textValue && textValue.length > 0 && clear
+                    ? { width: "calc(100% - 2.4rem)" }
+                    : { width: "100%" }
+                }
+                className={`${type !== "text" ? "_format" : ""}${
+                  type === "number" ? " _number" : ""
+                }${type === "password" ? " _password" : ""}${
+                  alignRight ? " alR" : ""
+                }`}
+                ref={inputRef}
+              />
+
+              {isTextFocus && textValue && textValue.length > 0 && clear && (
+                <button
+                  type="button"
+                  className="field-btn _input-clear _active"
+                  onClick={() => {
+                    //setIsTextFocus(false);
+                    setTextValue("");
+                    inputRef.current.focus();
+                  }}
+                >
+                  <span className="hide">입력값삭제</span>
+                </button>
+              )}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );
@@ -183,9 +271,8 @@ export const TextInput = ({
 
 export const CustomInput = ({
   type = "text",
-  length,
-  secureLength,
-  maxLength,
+  length = 2,
+  maxLength = 4,
 }) => {
   const [isFocus, setIsFocus] = useState(false);
   const [password, setPassword] = useState([]);
@@ -202,7 +289,7 @@ export const CustomInput = ({
       <label
         className="_secureTxt"
         data-length={length}
-        data-secureline={secureLength}
+        data-secureline={maxLength - length}
       >
         <input
           type={type}

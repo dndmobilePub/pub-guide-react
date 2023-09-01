@@ -1,8 +1,10 @@
+import styles from "./Options.module.scss";
 import { ButtonGuide } from "./Guide/Button";
 import { TitleGuide } from "./Guide/Title";
 import { TextGuide } from "./Guide/Text";
 import { FieldGuide } from "./Guide/Field";
-import styles from "./Options.module.scss";
+import { TextInputGuide } from "./Guide/TextInput";
+import { CustomInputGuide } from "./Guide/CustomInput";
 
 export const Options = (props) => {
   const { component } = props;
@@ -13,6 +15,8 @@ export const Options = (props) => {
       {component === "Title" && (<TitleGuide />)}
       {component === "Text" && (<TextGuide />)}
       {component === "Field" && (<FieldGuide />)}
+      {component === "TextInput" && (<TextInputGuide />)}
+      {component === "CustomInput" && (<CustomInputGuide />)}
       <h3>❗ 필수 옵션</h3>
       <table className={`${styles.table}`}>
         <caption>필수</caption>
@@ -298,14 +302,19 @@ export const Options = (props) => {
                 <td>placeholder 문구 입력</td>
               </tr>
               <tr>
-                <td>minLength</td>
+                <td>min</td>
                 <td>Any Number</td>
-                <td>최소 글자 수 설정</td>
+                <td>최소 숫자 설정 (type = {`"number"`}일때만 적용)</td>
+              </tr>
+              <tr>
+                <td>max</td>
+                <td>Any Number</td>
+                <td>최대 숫자 설정 (type = {`"number"`}일때만 적용)</td>
               </tr>
               <tr>
                 <td>maxLength</td>
                 <td>Any Number</td>
-                <td>최대 글자 수 설정</td>
+                <td>최대 글자 수 설정 (type = {`"number"`}일때는 적용되지않음)</td>
               </tr>
               <tr>
                 <td>initText</td>
@@ -324,12 +333,12 @@ export const Options = (props) => {
                 <td>
                   <strong>false(기본값)</strong> / true
                 </td>
-                <td>readonly 여부 설정</td>
+                <td>disabled 여부 설정</td>
               </tr>
               <tr>
                 <td>clear</td>
                 <td>
-                  <strong>true(기본값)</strong> / true
+                  <strong>true(기본값)</strong> / false
                 </td>
                 <td>인풋 데이터 삭제버튼 표시 여부 설정</td>
               </tr>
@@ -351,15 +360,10 @@ export const Options = (props) => {
                 </td>
                 <td>인풋 타입 지정</td>
               </tr>
-              <tr>
+              <tr> 
                 <td>length</td>
                 <td>Number</td>
-                <td>커스텀 패스워드 인풋에서 입력받을 글자 수</td>
-              </tr>
-              <tr>
-                <td>secureLength</td>
-                <td>Number</td>
-                <td>커스텀 패스워드 인풋에서 가림 처리할 글자 수</td>
+                <td>커스텀 패스워드 인풋에서 가림처리 되지 않는 글자 수</td>
               </tr>
               <tr>
                 <td>maxLength</td>
