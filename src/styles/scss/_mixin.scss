@@ -424,7 +424,8 @@
     @if ($line == 1) {
         overflow: hidden;
         text-overflow: ellipsis;
-        // -o-text-overflow:ellipsis;-moz-binding:url(ellipsis.xml#ellipsis);
+        -o-text-overflow:ellipsis;
+        //-moz-binding:url(ellipsis.xml#ellipsis);
         white-space: nowrap;
         height:$height;
     } @else {
@@ -433,7 +434,8 @@
         -webkit-line-clamp: $line;
         overflow: hidden;
         text-overflow: ellipsis;
-        // -o-text-overflow:ellipsis;-moz-binding:url(ellipsis.xml#ellipsis);
+        -o-text-overflow:ellipsis;
+        //-moz-binding:url(ellipsis.xml#ellipsis);
         height:$height;
     }
 }

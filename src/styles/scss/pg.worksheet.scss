@@ -206,7 +206,7 @@ $pgDivice:'.frame_device';
         
     h1 {
         @include el-size(11rem, 5.4rem);
-        background:url('/img/logo.png') 0 50% no-repeat; background-size:11rem auto;
+        background:url(/img/logo.png) 0 50% no-repeat; background-size:11rem auto;
         opacity:.5;
     }
 
@@ -1055,7 +1055,7 @@ html.util_show {
                     padding:10rem 0; background-color:$color-gray3;
                     i.no_data {
                         @include display(block); @include el-size(2rem, 2rem); margin:0 auto 1rem;
-                        // url(./../img/ico_nodata.gif) no-repeat
+                        // url(/img/ico_nodata.gif) no-repeat
                     }
                 }
             }

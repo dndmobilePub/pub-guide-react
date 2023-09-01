@@ -19,10 +19,12 @@
 @import 'cp.ico';
 @import 'cp.input';
 @import 'cp.select';
-@import 'cp.tab';
 @import 'cp.rdochk';
 @import 'cp.popup';
 @import 'cp.accodion';
+@import 'cp.tab';
+@import 'cp.swiper';
+
 // @import 'cp.popup2';
 // @import 'cp.form';
 @import 'cp.list';
@@ -198,6 +200,7 @@ legend, caption{@include ir("hide");}
 #{$darMode} {
     background-color:$color-darkMode3; color:$color-white;
     body {background-color:$color-darkMode3; color:$color-white;}
+    a {color:$color-white;}
 }
 
 // *********************
