@@ -206,7 +206,7 @@ $pgDivice:'.frame_device';
         
     h1 {
         @include el-size(11rem, 5.4rem);
-        background:url(/img/logo.png) 0 50% no-repeat; background-size:11rem auto;
+        background:url('../../assets/img/logo.png') 0 50% no-repeat; background-size:11rem auto;
         opacity:.5;
     }
 
