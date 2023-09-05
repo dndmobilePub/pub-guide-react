@@ -329,7 +329,7 @@ export const CustomInput = ({
 };
 
 export const CheckBox = ({
-  type = "circle",
+  switchType = "",
   checked = false,
   label,
   readOnly,
@@ -347,11 +347,11 @@ export const CheckBox = ({
         onChange && onChange();
       }}
       className={`${
-        type.startsWith("switch")
-          ? `field-switch${type.endsWith("-text") ? " txt" : ""}${
-              type.endsWith("-lg") ? " lg" : ""
+        switchType.startsWith("switch")
+          ? `field-switch${switchType.endsWith("-text") ? " txt" : ""}${
+              switchType.endsWith("-lg") ? " lg" : ""
             }`
-          : `field-checkbox${type ? " " + type : ""}`
+          : `field-checkbox${switchType ? " " + switchType : ""}`
       }`}
     >
       <input

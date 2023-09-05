@@ -5,6 +5,8 @@ import { Modal } from "./Popup";
 export const SelectBox = ({
   type = "default",
   selectTitle,
+  confirmText,
+  placeholder,
   list
 }) => {
   const [position, setPosition] = useState("top");
@@ -22,7 +24,7 @@ export const SelectBox = ({
           <Button
             size="sm"
             modal
-            onClick={() => {
+            onclick={() => {
               setPosition("bottom");
               setIsOpenModal(!isOpenModal);
             }}
@@ -33,7 +35,7 @@ export const SelectBox = ({
             <input
               type="tel"
               className="_format _number"
-              placeholder="휴대전화 앞자리"
+              placeholder={placeholder}
               maxLength="3"
             />
           </div>
@@ -43,7 +45,7 @@ export const SelectBox = ({
             isOpen={isOpenModal}
             toggleModal={toggleModal}
             title={selectTitle}
-            confirmText="선택"
+            confirmText={confirmText ?? "선택"}
             confirmFunction={() => {
               setDefaultText(isSelected);
             }}

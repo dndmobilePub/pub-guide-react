@@ -5,10 +5,16 @@ import { TextGuide } from "./Guide/Text";
 import { FieldGuide } from "./Guide/Field";
 import { TextInputGuide } from "./Guide/TextInput";
 import { CustomInputGuide } from "./Guide/CustomInput";
+import { CheckBoxGuide } from "./Guide/CheckBox";
+import { RadioGuide } from "./Guide/RadioBox";
+import { SelectBoxGuide } from "./Guide/SelectBox";
+import { PopupGuide } from "./Guide/Popup";
+import { TooltipGuide } from "./Guide/Tooltip";
+import { AccordionGuide } from "./Guide/Accordion";
+import { TabMenuGuide } from "./Guide/TabMenu";
 
 export const Options = (props) => {
   const { component } = props;
-  
   return (
     <>
       {(component === "Button" || component === "ButtonWrap") && (<ButtonGuide />)}
@@ -17,6 +23,13 @@ export const Options = (props) => {
       {component === "Field" && (<FieldGuide />)}
       {component === "TextInput" && (<TextInputGuide />)}
       {component === "CustomInput" && (<CustomInputGuide />)}
+      {component === "CheckBox" && (<CheckBoxGuide />)}
+      {(component === "RadioBox" || component === "Radio") && (<RadioGuide />)}
+      {component === "SelectBox" && (<SelectBoxGuide />)}
+      {component === "Popup" && (<PopupGuide />)}
+      {component === "Tooltip" && (<TooltipGuide />)}
+      {component === "Accordion" && (<AccordionGuide />)}
+      {component === "TabMenu" && (<TabMenuGuide />)}
       <h3>❗ 필수 옵션</h3>
       <table className={`${styles.table}`}>
         <caption>필수</caption>
@@ -31,7 +44,7 @@ export const Options = (props) => {
           {component === "Button" ? (
             <tr>
               <td>chidren</td>
-              <td>Any Text</td>
+              <td>String</td>
               <td>버튼 텍스트</td>
             </tr>
           ) : component === "ButtonWrap" ? (
@@ -43,12 +56,12 @@ export const Options = (props) => {
           ) : component === "Title" ? (
             <tr>
               <td>text</td>
-              <td>Any Text</td>
+              <td>String</td>
               <td>타이틀 내용</td>
             </tr>
-          ) : component === "TextInput" ||
+          ) : component === "TextInput" || component === "CheckBox" ||
             component === "CustomInput" ||
-            component === "Radio" ? (
+            component === "Radio" ||  component === "Popup" ? (
             <tr>
               <td>-</td>
               <td>-</td>
@@ -57,19 +70,19 @@ export const Options = (props) => {
           ) : component === "Field" ? (
             <tr>
               <td>children</td>
-              <td>JSX Component</td>
+              <td>Html(JSX)</td>
               <td>인풋 컴포넌트</td>
             </tr>
           ) : component === "RadioBox" ? (
             <>
               <tr>
                 <td>children</td>
-                <td>JSX Component</td>
+                <td>Html(JSX)</td>
                 <td>{`<Radio>`} 컴포넌트</td>
               </tr>
               <tr>
                 <td>name</td>
-                <td>Any Text</td>
+                <td>String</td>
                 <td>라디오 버튼을 활성화하기 위한 name 설정</td>
               </tr>
             </>
@@ -81,11 +94,28 @@ export const Options = (props) => {
                 <td>SelectBox 옵션에 들어갈 문자열 형태의 배열</td>
               </tr>
             </>
+          ) : component === "Tooltip" ? (
+            <>
+              <tr>
+                <td>msg</td>
+                <td>Html(JSX)</td>
+                <td>
+                  툴팁 컨텐츠 영역 안에 들어갈 JSX 엘리먼트
+                </td>
+              </tr>
+              <tr>
+                <td>tooltip</td>
+                <td>Object</td>
+                <td>
+                  툴팁 상태가 담겨있는 변수 (Tooltip 컴포넌트와 TooltipHtml은 같은 변수를 참조해야함. 컴포넌트 참고)
+                </td>
+              </tr>
+            </>
           ) : component === "Accordion" ? (
             <>
               <tr>
                 <td>title</td>
-                <td>Any Text</td>
+                <td>String</td>
                 <td>아코디언 제목</td>
               </tr>
               <tr>
@@ -94,10 +124,18 @@ export const Options = (props) => {
                 <td>아코디언 컨텐츠</td>
               </tr>
             </>
+          ): component === "TabMenu" ? (
+            <>
+              <tr>
+                <td>menus</td>
+                <td>Array</td>
+                <td>탭메뉴 배열</td>
+              </tr>
+            </>
           ) : (
             <tr>
               <td>chidren</td>
-              <td>Any Text</td>
+              <td>String</td>
               <td>텍스트</td>
             </tr>
           )}
@@ -179,7 +217,7 @@ export const Options = (props) => {
               <tr>
                 <td>onclick</td>
                 <td>
-                  <strong>- (기본값)</strong> / function()
+                  function()
                 </td>
                 <td>버튼 클릭시 실행할 커스텀 함수</td>
               </tr>
@@ -233,7 +271,7 @@ export const Options = (props) => {
               </tr>
               <tr>
                 <td>sub</td>
-                <td>Any Text</td>
+                <td>String</td>
                 <td>서브 타이틀 설정</td>
               </tr>
             </>
@@ -260,14 +298,14 @@ export const Options = (props) => {
               <tr>
                 <td>label</td>
                 <td>
-                  <strong>- (기본값)</strong> / Any Text
+                  <strong>- (기본값)</strong> / String
                 </td>
                 <td>인풋 라벨 텍스트 설정</td>
               </tr>
               <tr>
                 <td>info</td>
                 <td>
-                  <strong>- (기본값)</strong> / Any Text
+                  <strong>- (기본값)</strong> / String
                 </td>
                 <td>하단에 정보 메세지 표시</td>
               </tr>
@@ -298,7 +336,7 @@ export const Options = (props) => {
               </tr>
               <tr>
                 <td>placeholder</td>
-                <td>Any Text</td>
+                <td>String</td>
                 <td>placeholder 문구 입력</td>
               </tr>
               <tr>
@@ -318,7 +356,7 @@ export const Options = (props) => {
               </tr>
               <tr>
                 <td>initText</td>
-                <td>Any Text</td>
+                <td>String</td>
                 <td>최초 표시될 value값 설정</td>
               </tr>
               <tr>
@@ -374,14 +412,21 @@ export const Options = (props) => {
           ) : component === "CheckBox" ? (
             <>
               <tr>
-                <td>type</td>
+                <td>type (Field용)</td>
                 <td>
                   <strong>&#34;circle&#34;(기본값)</strong> /
-                  &#34;circleLine&#34; / &#34;square&#34; / &#34;squareLine&#34;
-                  / &#34;switch&#34; / &#34;switch-text&#34; /
-                  &#34;switch-lg&#34;
+                  &#34;c-line&#34; / &#34;square&#34; / &#34;s-line&#34;
                 </td>
                 <td>체크박스 비주얼 타입 지정</td>
+              </tr>
+              <tr>
+                <td>switchType</td>
+                <td>
+                  <strong>-(기본값)</strong> /
+                  &#34;switch&#34; / &#34;switch-text&#34; /
+                  &#34;switch-lg&#34;
+                </td>
+                <td>체크박스 스위치 타입 지정 (type과 상관없이 적용)</td>
               </tr>
               <tr>
                 <td>checked</td>
@@ -390,7 +435,7 @@ export const Options = (props) => {
               </tr>
               <tr>
                 <td>label</td>
-                <td>Any Text</td>
+                <td>String</td>
                 <td>체크박스 라벨 텍스트</td>
               </tr>
               <tr>
@@ -419,7 +464,7 @@ export const Options = (props) => {
             <>
               <tr>
                 <td>label</td>
-                <td>Any Text</td>
+                <td>String</td>
                 <td>체크박스 라벨 텍스트</td>
               </tr>
               <tr>
@@ -447,10 +492,182 @@ export const Options = (props) => {
               </tr>
               <tr>
                 <td>selectTitle</td>
-                <td>Any Text</td>
+                <td>String</td>
                 <td>
                   커스텀 셀렉트박스일 경우 모달창 상단에 들어갈 타이틀 설정
                 </td>
+              </tr>
+              <tr>
+                <td>placeholder</td>
+                <td>String</td>
+                <td>
+                  커스텀 셀렉트박스일 경우 인풋에 들어갈 플레이스홀더 설정
+                </td>
+              </tr>
+              <tr>
+                <td>confirmText</td>
+                <td>String</td>
+                <td>
+                  커스텀 셀렉트박스일 경우 인풋 좌측 버튼명 설정
+                </td>
+              </tr>
+            </>
+          ): component === "Popup" ? (
+            <>
+              <tr>
+                <td>position</td>
+                <td>top (기본값) / left / bottom / center</td>
+                <td>모달 컴포넌트 포지셔닝 값</td>
+              </tr>
+              <tr>
+                <td>isOpen</td>
+                <td>false (기본값) / true</td>
+                <td>
+                  모달창 오픈여부 설정
+                </td>
+              </tr>
+              <tr>
+                <td>prev</td>
+                <td>false (기본값) / true</td>
+                <td>
+                  커스텀 셀렉트박스일 경우 인풋에 들어갈 플레이스홀더 설정
+                </td>
+              </tr>
+              <tr>
+                <td>toggleModal</td>
+                <td>function()</td>
+                <td>
+                  모달을 외부에서 컨트롤하기 위해 전달할 커스텀 함수
+                </td>
+              </tr>
+              <tr>
+                <td>title</td>
+                <td>String</td>
+                <td>
+                  모달창 제목
+                </td>
+              </tr>
+              <tr>
+                <td>content</td>
+                <td>Html(JSX)</td>
+                <td>
+                  내부 컨텐츠 JSX Element
+                </td>
+              </tr>
+              <tr>
+                <td>confirmText</td>
+                <td>String</td>
+                <td>
+                  모달창 확인버튼 텍스트
+                </td>
+              </tr>
+              <tr>
+                <td>cancelText</td>
+                <td>String</td>
+                <td>
+                  모달창 취소버튼 텍스트
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={3}>▼ Toast 컴포넌트 옵션</td>
+              </tr>
+              <tr>
+                <td>msg</td>
+                <td>String</td>
+                <td>
+                  토스트 팝업 텍스트
+                </td>
+              </tr>
+              <tr>
+                <td>timer</td>
+                <td>Number</td>
+                <td>
+                  토스트 팝업을 띄워놓을 시간 설정(ms)
+                </td>
+              </tr>
+              <tr>
+                <td>closeToast</td>
+                <td>function()</td>
+                <td>
+                 토스트 팝업을 닫기 위해 컴포넌트에 전달할 커스텀 함수
+                </td>
+              </tr>
+            </>
+          ) : component === "Tooltip" ? (
+            <>
+              <tr>
+                <td>tooltipId</td>
+                <td>Number</td>
+                <td>툴팁에 아이디 부여</td>
+              </tr>
+              <tr>
+                <td>label</td>
+                <td>String</td>
+                <td>
+                  툴팁 라벨 텍스트 설정
+                </td>
+              </tr>
+              
+              <tr>
+                <td>dir</td>
+                <td>String</td>
+                <td>
+                  툴팁이 표시될 방향 설정 (기본 right, left, top, bottom)
+                </td>
+              </tr>
+              <tr>
+                <td>align</td>
+                <td>String</td>
+                <td>
+                  라벨 텍스트 정렬 설정 (기본 left, right, center)
+                </td>
+              </tr>
+              <tr>
+                <td>onclick</td>
+                <td>String</td>
+                <td>
+                  툴팁이 표시될 방향 설정 (기본 right, left, top, bottom)
+                </td>
+              </tr>
+              <tr>
+                <td>forwardRef</td>
+                <td>variable</td>
+                <td>
+                  ref가 필요한 경우 설정
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={3}>▼ TooltipHtml 컴포넌트 옵션</td>
+              </tr>
+              <tr>
+                <td>onclick</td>
+                <td>function()</td>
+                <td>
+                  툴팁을 닫을 때 실행할 커스텀 함수 전달
+                </td>
+              </tr>
+            </>
+          ): component === "TabMenu" ? (
+            <>
+              <tr>
+                <td>type</td>
+                <td>0 (기본값) / 1 / 2 / 3 / 4</td>
+                <td>탭메뉴 타입 설정</td>
+              </tr>
+              <tr>
+                <td>vertical</td>
+                <td>false (기본값) / true</td>
+                <td>가로 / 세로 탭메뉴 설정</td>
+              </tr>
+              <tr>
+                <td>style</td>
+                <td>- (기본값) / Object</td>
+                <td>인라인 스타일을 설정해야되는 경우 설정</td>
+              </tr>
+              <tr>
+                <td>className</td>
+                <td>- (기본값) / String</td>
+                <td>커스텀 클래스 네임 설정</td>
               </tr>
             </>
           ) : component === "Accordion" ? (
@@ -489,12 +706,12 @@ export const Options = (props) => {
               </tr>
               <tr>
                 <td>children</td>
-                <td>JSX Component</td>
-                <td>커스텀 아코디언을 위한 JSX 컴포넌트</td>
+                <td>Html(JSX)</td>
+                <td>커스텀 아코디언을 위한 JSX 엘리먼트</td>
               </tr>
               <tr>
-                <td>onClick</td>
-                <td>-(기본값) / Any function</td>
+                <td>onclick</td>
+                <td>function()</td>
                 <td>클릭했을때 실행할 함수가 있다면 추가</td>
               </tr>
             </>

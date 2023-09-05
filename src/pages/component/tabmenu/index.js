@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { TabMenu } from "../../../components/UI/TabMenu";
+import { Options } from "../../../components/Common/Options";
 
 export default function TabMenus() {
   const [vertical, setVertical] = useState(false);
   return (
     <div id="cp-wrap">
+      <Options component={"TabMenu"}/>
       <section className="cp-content">
         <h2 className="cp-tit dep02">block 형, 새창으로 이동</h2>
         <div className="component">
@@ -133,7 +135,6 @@ export default function TabMenus() {
             ]}
           />
           <TabMenu
-            className={`${vertical ? 'tab-vertical':''}`}
             vertical={vertical}
             type={1}
             style={{
