@@ -9,6 +9,12 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+  span{
+    color: gold;
+    font-weight: bold;
+    padding: 0 5px;
+    cursor: pointer;
+  }
 }
 .input{
   height:18px;

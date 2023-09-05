@@ -10,6 +10,7 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
     right: 0,
     top: 0,
   });
+  const tabWrapRef = useRef(null);
   const tabListRef = useRef(null);
   const contentsRef = useRef(null);
   const myRefs = useRef([]);
@@ -18,6 +19,11 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
   const onHandleScroll = () => {
     if (contentsRef.current) {
       setContentsHeight(contentsRef.current.scrollTop);
+      setTabPosition(() => ({
+        left: activeTab * tabSize.width + activeTab * 20,
+        top: "auto",
+        right: "auto",
+      }));
     }
   };
 
@@ -51,15 +57,17 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
     setActiveTab(0);
   }, [vertical]);
 
-  useEffect(()=>{
-    if(tabListRef.current){
+  useEffect(() => {
+    if (tabListRef.current && type !== 4) {
       tabListRef.current.scrollTo({
-        left: !vertical && activeTab > 0 ? tabPosition.left - tabSize.width * 3 : 0,
-        top: vertical && activeTab > 0 ? tabPosition.top - tabSize.height * 3 : 0,
+        left:
+          !vertical && activeTab > 0 ? tabPosition.left - tabSize.width * 3 : 0,
+        top:
+          vertical && activeTab > 0 ? tabPosition.top - tabSize.height * 3 : 0,
         behavior: "smooth",
       });
     }
-  },[tabPosition, activeTab, tabSize, vertical])
+  }, [tabPosition, activeTab, tabSize, vertical, type]);
 
   return (
     <div
@@ -71,10 +79,11 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
           : type === 4
           ? " tab-scroll tab-moving"
           : ""
-      } ${className ? className : ""}`}
+      } ${vertical ? "tab-vertical" : ""} ${className ? className : ""}`}
       data-roll="tab"
-      data-type={`${type === 4 ? 'tab-scroll':null}`}
+      data-type={`${type === 4 ? "tab-scroll" : null}`}
       style={style}
+      ref={tabWrapRef}
     >
       <div
         className={`tab-list-wrap${
@@ -108,7 +117,7 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
                     ? "auto"
                     : index === 0
                     ? index
-                    : (tabSize.width * index) + (20 * index),
+                    : tabSize.width * index + 20 * index,
                   top: vertical
                     ? index === 0
                       ? index
@@ -137,7 +146,7 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
       {type > 0 && type !== 3 && (
         <div
           className="tab-contents-wrap"
-          onScroll={onHandleScroll}
+          onScroll={type === 4 ? onHandleScroll : null}
           ref={contentsRef}
         >
           {menus.map((menu, index) => (
