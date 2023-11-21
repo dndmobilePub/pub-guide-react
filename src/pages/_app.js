@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Header from "../components/Common/Header";
 import Tabs from "../components/Common/Tabs";
-import "../assets/scss/pg.workSheet.scss";
+import "../styles/pg.worksheet.scss";
 import {
   completeCount,
   curPercent,
