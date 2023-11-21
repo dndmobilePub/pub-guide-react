@@ -3,7 +3,6 @@ import styles from "./Guide.module.scss";
 import { TabMenu } from "../../UI/TabMenu";
 
 export const TabMenuGuide = () => {
-  const [type, setType] = useState(1);
   return (
     <>
       <h3>👀 탭메뉴 컴포넌트 사용방법</h3>
@@ -13,27 +12,6 @@ export const TabMenuGuide = () => {
         {`import { TabMenu } from "src/component/UI/TabMenu";`}
         <br />
         {`<TabMenu`}
-        <br />
-        &nbsp;&nbsp;
-        {`type={`}
-        <span
-          onClick={(e) => {
-            setType(
-              type === 1
-                ? 2
-                : type === 2
-                ? 3
-                : type === 3
-                ? 4
-                : type === 4
-                ? 0
-                : 1
-            );
-          }}
-        >
-          {type}
-        </span>
-        {`}`}
         <br />
         &nbsp;&nbsp;
         {`menus={[`}
@@ -62,7 +40,6 @@ export const TabMenuGuide = () => {
       <br />
       <div className={`${styles.box}`}>
         <TabMenu
-          type={type}
           menus={[
             {
               title: "Tab00",

@@ -128,8 +128,8 @@ export const Options = (props) => {
             <>
               <tr>
                 <td>menus</td>
-                <td>Array</td>
-                <td>탭메뉴 배열</td>
+                <td>Array. <br/>{`[{ title : String, href : String, blank : Boolean, contents : any}]`}</td>
+                <td>탭메뉴 배열 데이터. <br/>{`[{ title : 메뉴이름 문자열, href : 경로 문자열, blank : 새창여부 true/false, contents : 탭 컨텐츠 JSX Element}]`}</td>
               </tr>
             </>
           ) : (
@@ -650,14 +650,39 @@ export const Options = (props) => {
           ): component === "TabMenu" ? (
             <>
               <tr>
-                <td>type</td>
-                <td>0 (기본값) / 1 / 2 / 3 / 4</td>
-                <td>탭메뉴 타입 설정</td>
+                <td>expand</td>
+                <td>false (기본값) / true</td>
+                <td>탭메뉴 Block 형태 여부</td>
+              </tr>
+              <tr>
+                <td>selHV</td>
+                <td>false (기본값) / true</td>
+                <td>가로 세로 탭메뉴 설정시 첫번째 텝메뉴에 설정해야 되는 옵션</td>
+              </tr>
+              <tr>
+                <td>line</td>
+                <td>{`""`} (기본값) / {`"top"`}</td>
+                <td>탭메뉴 라인 탑 설정</td>
+              </tr>
+              <tr>
+                <td>align</td>
+                <td>{`""`} (기본값) / {`"center"`} / {`"right"`}</td>
+                <td>탭메뉴 정렬 설정</td>
+              </tr>
+              <tr>
+                <td>moving</td>
+                <td>false (기본값) / true</td>
+                <td>탭메뉴 라인 흐르는 애니메이션 여부</td>
+              </tr>
+              <tr>
+                <td>scroll</td>
+                <td>false (기본값) / true</td>
+                <td>탭메뉴 클릭시 컨텐츠 스크롤 여부</td>
               </tr>
               <tr>
                 <td>vertical</td>
                 <td>false (기본값) / true</td>
-                <td>가로 / 세로 탭메뉴 설정</td>
+                <td>탭메뉴 가로 / 세로 여부</td>
               </tr>
               <tr>
                 <td>style</td>
