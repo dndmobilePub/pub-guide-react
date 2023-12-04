@@ -258,7 +258,7 @@
 }
 
 @mixin btn($type) {
-    border-radius:.3rem;
+    /* border-radius:.3rem; */
     &:not(.disabled):not([disabled]):not([aria-disabled="disabled"]):focus {box-shadow:0 0 0 0.1rem rgba(0, 0, 0, .1), 0 2px 5px 0.2rem rgba(0, 0, 0, .15);}
 
     &[aria-disabled="disabled"], &[disabled], &.disabled {
