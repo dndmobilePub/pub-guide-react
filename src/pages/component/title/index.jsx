@@ -3,7 +3,7 @@ import ControlBox from "../../../components/Common/ControlBox";
 import styles from "../../page.module.scss";
 import { useRouter } from "next/router";
 
-export default function TextPage() {
+export default function TitlePage() {
   const { route } = useRouter();
   return (
     <div id="cp-wrap">
@@ -21,7 +21,7 @@ export default function TextPage() {
           Text
         </Link>
       </nav>
-      <ControlBox type="Text" />
+      <ControlBox type="Title" />
     </div>
   );
 }
