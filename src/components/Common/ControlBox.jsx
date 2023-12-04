@@ -3,6 +3,7 @@ import styles from "./ControlBox.module.scss";
 import * as PROPS from "../../data/cm.props";
 import * as STATES from "../../data/cm.initialState";
 import * as UI from "../UI";
+import { useEffect } from "react";
 import { useRef } from "react";
 
 const ControlBox = ({ type }) => {
@@ -47,8 +48,6 @@ const ControlBox = ({ type }) => {
         setRealData((prevData) => ({ ...prevData, [propName]: value }));
     }
 
-    console.log(data)
-
     return (
         <>
             <div className={styles['canvas']}>
@@ -61,23 +60,15 @@ const ControlBox = ({ type }) => {
                     {`<${data?.name}
                     ${data?.bgType ? ` bgType={${data?.bgType}}` : ''}
                     ${data?.size ? ` size="${data?.size}"` : ''}
-                    ${data?.text ? ` text="${data?.text}"` : ''}
-                    ${data?.sub ? ` sub="${data?.sub}"` : ''}
-                    ${data?.depth ? ` depth={${data?.depth}}` : ''}
-                    ${data?.lang ? ` lang="${data?.lang}"` : ''}
-                    ${data?.ell ? ` ell={${data?.ell}}` : ''}
-                    ${data?.split ? ' split' : ''}
                     ${data?.isLine ? ' isLine' : ''}
                     ${data?.isRound ? ' isRound' : ''}
                     ${data?.isShadow ? ' isShadow' : ''}
                     ${data?.isDisabled ? ' isDisabled' : ''}
                     ${data?.isFull ? ' isfull' : ''}
-                    ${data?.isGrow ? ' isGrow' : ''}
-                    
-                    ${data?.children ? `>
-                    ${data?.name === "ButtonWrap" ? `<Button> Button1 </Button>
-                    <Button> Button2 </Button>` : data?.children}
-                  </${data?.name}>` : `/>`}`}
+                    ${data?.isGrow ? ' isGrow' : ''}>
+  ${data?.name === "ButtonWrap" ? `<Button> Button1 </Button>
+  <Button> Button2 </Button>` : data?.children}
+</${data?.name}>`}
                 </code>
                 <button onClick={handleCopyClipBoard}>{isCopied ? 'Copied' : 'Copy'}</button>
             </div>
@@ -99,8 +90,8 @@ const ControlBox = ({ type }) => {
                                     <fieldset id={`group${idx}`}>
                                         {options.map((opt) => (
                                             <div key={opt}>
-                                                {name === "children" || name === "text" || name === "sub" || name === "headcopy" ?
-                                                    data?.name === "ButtonWrap" ? `Button Components` : <input key={opt} type="text" value={data[name]} onChange={(e) => { updateData(name, e.target.value) }} />
+                                                {name === "children" ?
+                                                    data?.name === "ButtonWrap" ? `Button Components` : <input key={opt} type="text" value={data?.children} onChange={(e) => { updateData(name, e.target.value) }} />
                                                     :
                                                     <div>
                                                         <input checked={data[name] === opt ? true : false} type="radio" value={opt} name={`group${idx}`} id={`Opt_${opt}`} onChange={() => {
