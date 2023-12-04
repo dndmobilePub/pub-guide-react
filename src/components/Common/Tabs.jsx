@@ -23,9 +23,9 @@ const Tabs = (props) => {
       </SwiperSlide>
       <SwiperSlide
         tag="li"
-        className={`${props.pathname === "component/text" ? "active" : ""}`}
+        className={`${props.pathname === "component/title" || props.pathname === "component/text" ? "active" : ""}`}
       >
-        <Link href={"/component/text"}>타이틀/텍스트</Link>
+        <Link href={"/component/title"}>타이틀/텍스트</Link>
       </SwiperSlide>
       <SwiperSlide
         tag="li"
