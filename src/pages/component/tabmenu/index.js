@@ -11,7 +11,6 @@ export default function TabMenus() {
         <h2 className="cp-tit dep02">block 형, 새창으로 이동</h2>
         <div className="component">
           <TabMenu
-            expand={true}
             menus={[
               {
                 title: "Tab00",
@@ -51,7 +50,7 @@ export default function TabMenus() {
         <h2 className="cp-tit dep02">왼쪽 정렬, 액션</h2>
         <div className="component">
           <TabMenu
-            moving={true}
+            type={1}
             menus={[
               {
                 title: "Tab00",
@@ -85,8 +84,7 @@ export default function TabMenus() {
         <h2 className="cp-tit dep02">가운데 정렬, line top</h2>
         <div className="component">
           <TabMenu
-            line="top"
-            align="center"
+            type={2}
             menus={[
               {
                 title: "Tab00",
@@ -120,7 +118,7 @@ export default function TabMenus() {
         <h2 className="cp-tit dep02">가로 / 세로</h2>
         <div className="component">
           <TabMenu
-            selHV={true}
+            type={3}
             menus={[
               {
                 title: "horizontal",
@@ -138,7 +136,7 @@ export default function TabMenus() {
           />
           <TabMenu
             vertical={vertical}
-            moving={true}
+            type={1}
             style={{
               width: '400px', 
               maxWidth: '100%',
@@ -218,8 +216,7 @@ export default function TabMenus() {
         <h2 className="cp-tit dep02">오른쪽 정렬, 스크롤 이동</h2>
         <div className="component">
           <TabMenu
-            scroll={true}
-            align="right"
+            type={4}
             menus={[
               {
                 title: "menu0",
