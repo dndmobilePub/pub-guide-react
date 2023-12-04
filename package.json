@@ -1,7 +1,7 @@
 {
-  "name": "scbank_react",
-  "version": "0.1.0",
-  "private": true,
+  "name": "publishing-guide-react",
+  "version": "0.0.1",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",

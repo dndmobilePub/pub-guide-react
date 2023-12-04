@@ -1,0 +1,62 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixin";
+
+.btnWrap {
+  &.split {
+    &.col2 {
+      flex-wrap: wrap;
+      & > * {
+        margin: 0;
+        @include split(2, 0.4rem);
+      }
+      .full {
+        display: block;
+        @include flexbox(1, 0, 100%);
+      }
+    }
+  }
+
+  &.full > button {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 0 !important;
+    & ~ button {
+      margin-bottom: 0 !important;
+      margin-top: 1rem;
+    }
+  }
+
+  &.grow {
+    @include display(flex);
+    flex-wrap: wrap;
+    & > * {
+      flex: 1 0 0;
+      @include display(block);
+    }
+
+    &.full {
+      width: 100%;
+      flex: none;
+    }
+
+    &.full > button {
+      margin: 0;
+      & ~ button {
+        margin: 0;
+      }
+      &:first-child {
+        border-radius: 0.3rem 0 0 0.3rem;
+      }
+      & + & {
+        border-radius: 0;
+      }
+      &:last-child {
+        border-radius: 0 0.3rem 0.3rem 0;
+      }
+
+      &:focus {
+        z-index: -1;
+      } // shadow 효과가 있을때만 적용
+    }
+  }
+}

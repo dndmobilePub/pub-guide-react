@@ -84,7 +84,7 @@ export default function App({ Component, pageProps }) {
               )}
               <Component {...pageProps} />
             </div>
-            {/* <div className={`btm_btn_set${active ? " active" : ""}`}>
+            <div className={`btm_btn_set${active ? " active" : ""}`}>
               <ScrollDetection />
               <button
                 type="button"
@@ -99,7 +99,7 @@ export default function App({ Component, pageProps }) {
                 <span className="hide">TOP</span>
               </button>
               <DarkModeBtn />
-            </div> */}
+            </div>
           </div>
         </SearchProvider>
       )}

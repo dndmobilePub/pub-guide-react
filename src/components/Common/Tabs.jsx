@@ -14,7 +14,7 @@ const Tabs = (props) => {
       <SwiperSlide
         tag="li"
         className={`${
-          props.pathname === "component/button" || props.pathname === ""
+          props.pathname === "component/button" || props.pathname === "component/buttonWrap" || props.pathname === ""
             ? "active"
             : ""
         }`}
