@@ -1,10 +1,65 @@
-@import "../../../styles/scss/variables";
-@import "../../../styles/scss/mixin";
+.btnWrap {
+  &.split {
+    &.col2 {
+      flex-wrap: wrap;
+      & > * {
+        margin: 0;
+        @include split(2, 0.4rem);
+      }
+      .full {
+        display: block;
+        @include flexbox(1, 0, 100%);
+      }
+    }
+  }
 
+  &.full > #{$btn} {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 0 !important;
+    & ~ .btn {
+      margin-bottom: 0 !important;
+      margin-top: 1rem;
+    }
+  }
+
+  &.grow {
+    @include display(flex);
+    flex-wrap: wrap;
+    & > * {
+      flex: 1 0 0;
+      @include display(block);
+    }
+
+    & > .full {
+      flex: none;
+    }
+
+    &.full > #{$btn} {
+      margin: 0;
+      & ~ .btn {
+        margin: 0;
+      }
+      &:first-child {
+        border-radius: 0.3rem 0 0 0.3rem;
+      }
+      & + & {
+        border-radius: 0;
+      }
+      &:last-child {
+        border-radius: 0 0.3rem 0.3rem 0;
+      }
+
+      &:focus {
+        z-index: -1;
+      } // shadow 효과가 있을때만 적용
+    }
+  }
+}
 #{$btn} {
   padding: 0.5rem 1rem;
   vertical-align: middle;
-  border-radius:.3rem; 
+
   & ~ .btn {
     margin-left: 0.5rem;
   }
@@ -83,6 +138,11 @@
       }
     }
   }
+  &-line,
+  &.line {
+    @include btn("line");
+  }
+
   &.round {
     @include btn("bg");
     padding-left: 1.5rem;
@@ -96,7 +156,7 @@
     }
   }
   &.shadow {
-    /* @include btn("bg"); */
+    @include btn("bg");
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 2px 3px rgba(0, 0, 0, 0.05);
     &:not(.disabled):not([disabled]):not([aria-disabled="disabled"]):hover,
     &:not(.disabled):not([disabled]):not([aria-disabled="disabled"]):focus {
@@ -106,20 +166,6 @@
     &[disabled],
     &.disabled {
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 2px 3px rgba(0, 0, 0, 0.05);
-    }
-  }
-  &-line,
-  &.line {
-    @include btn("line");
-    &.type2{
-      background: $color-white;
-      border-color: $color-violet;
-      color: $color-violet;
-    }
-    &.type3{
-      background: $color-white;
-      border-color: $color-blue;
-      color: $color-blue;
     }
   }
 
@@ -189,13 +235,13 @@
         }
       }
       /*
-            @include el-content(after){
-                margin:0;
-                width:100%; height:.1rem;
-                background:$color-gray1;
-                position:absolute; left:0; bottom:0;
-            }
-            */
+          @include el-content(after){
+              margin:0;
+              width:100%; height:.1rem;
+              background:$color-gray1;
+              position:absolute; left:0; bottom:0;
+          }
+          */
     }
   }
 
@@ -208,7 +254,7 @@
         @include pos-offset-r(50%, 5px);
         width: 0.6rem;
         height: 0.6rem;
-        margin-top: calc(-0.5rem / 2);
+        margin-top: calc(-0.5rem/2);
         border-left: 1px $color-gray1 solid;
         border-bottom: 1px $color-gray1 solid;
         transform: rotate(-135deg);
@@ -248,7 +294,6 @@
   &.full {
     margin: 0;
     margin-bottom: 0 !important;
-    width: 100%;
     & ~ .full {
       margin-top: 1rem;
     }
