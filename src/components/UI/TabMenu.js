@@ -16,14 +16,42 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
   const myRefs = useRef([]);
   const [contentsHeight, setContentsHeight] = useState(0);
 
-  const onHandleScroll = () => {
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = contentsRef.current.scrollTop;
+      const containerHeight = contentsRef.current.scrollHeight;
+      const tabHeight = containerHeight / menus.length;
+      console.log(
+        scrollPosition,
+        containerHeight,
+        tabHeight,
+        containerHeight / tabHeight
+      );
+
+      myRefs.current.forEach((ref, index) => {
+        console.log(ref.clientHeight * index, scrollPosition);
+        if (scrollPosition > ref.clientHeight * index - 10) {
+          setActiveTab(index);
+        }
+      });
+    };
+
     if (contentsRef.current) {
-      setContentsHeight(contentsRef.current.scrollTop);
-      setTabPosition(() => ({
-        left: activeTab * tabSize.width + activeTab * 20,
-        top: "auto",
-        right: "auto",
-      }));
+      contentsRef.current.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (contentsRef.current) {
+        contentsRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [menus, activeTab]);
+
+  const handleTabClick = (index) => {
+    const targetElement = document.getElementById(`tabpn-${index}`);
+
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -77,7 +105,7 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
           : type === 3
           ? " sel-h-v"
           : type === 4
-          ? " tab-scroll tab-moving"
+          ? " tab-scroll"
           : ""
       } ${vertical ? "tab-vertical" : ""} ${className ? className : ""}`}
       data-roll="tab"
@@ -107,30 +135,31 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
               aria-controls={`${type === 4 ? `tabpn-${index}` : ``}`}
               key={index}
               onClick={() => {
-                setActiveTab(index);
                 if (menu.onclick) menu.onclick();
                 if (type === 4) {
-                  myRefs.current[index].scrollIntoView({ behavior: "smooth" });
-                }
-                setTabPosition(() => ({
-                  left: vertical
-                    ? "auto"
-                    : index === 0
-                    ? index
-                    : tabSize.width * index + 20 * index,
-                  top: vertical
-                    ? index === 0
+                  handleTabClick(index);
+                } else {
+                  setActiveTab(index);
+                  setTabPosition(() => ({
+                    left: vertical
+                      ? "auto"
+                      : index === 0
                       ? index
-                      : tabSize.height * index
-                    : "auto",
-                  right: vertical ? 0 : "auto",
-                }));
+                      : tabSize.width * index + 20 * index,
+                    top: vertical
+                      ? index === 0
+                        ? index
+                        : tabSize.height * index
+                      : "auto",
+                    right: vertical ? 0 : "auto",
+                  }));
+                }
               }}
             >
               <a>{menu.title}</a>
             </li>
           ))}
-          {(type === 1 || type === 4) && (
+          {type === 1 && (
             <li
               className="highlight"
               style={{
@@ -146,7 +175,6 @@ export const TabMenu = ({ type = 0, menus, className, vertical, style }) => {
       {type > 0 && type !== 3 && (
         <div
           className="tab-contents-wrap"
-          onScroll={type === 4 ? onHandleScroll : null}
           ref={contentsRef}
         >
           {menus.map((menu, index) => (
