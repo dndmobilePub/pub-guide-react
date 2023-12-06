@@ -425,7 +425,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         -o-text-overflow:ellipsis;
-        //-moz-binding:url(ellipsis.xml#ellipsis);
+        /* -moz-binding:url(ellipsis.xml#ellipsis); */
         white-space: nowrap;
         height:$height;
     } @else {
@@ -435,7 +435,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         -o-text-overflow:ellipsis;
-        //-moz-binding:url(ellipsis.xml#ellipsis);
+        /* -moz-binding:url(ellipsis.xml#ellipsis); */
         height:$height;
     }
 }
